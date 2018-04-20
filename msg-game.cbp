@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="msg-game" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/msg-game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lsfml-network-d" />
+					<Add option="-lsfml-graphics-d" />
+					<Add option="-lsfml-window-d" />
+					<Add option="-lsfml-system-d" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/msg-game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lsfml-network" />
+					<Add option="-lsfml-graphics" />
+					<Add option="-lsfml-window" />
+					<Add option="-lsfml-system" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++14" />
+			<Add directory="include" />
+			<Add directory="extlib/SFML/include" />
+			<Add directory="extlib/imgui" />
+			<Add directory="extlib/imgui-sfml" />
+		</Compiler>
+		<Linker>
+			<Add option="-lopengl32" />
+			<Add directory="extlib/SFML/lib" />
+		</Linker>
+		<Unit filename="extlib/imgui-sfml/imgui-SFML.cpp" />
+		<Unit filename="extlib/imgui/imgui.cpp" />
+		<Unit filename="extlib/imgui/imgui_draw.cpp" />
+		<Unit filename="include/CharacterRenderer.hpp" />
+		<Unit filename="include/ChunkRenderer.hpp" />
+		<Unit filename="include/Components/AnimationComponent.hpp" />
+		<Unit filename="include/Components/CollisionComponent.hpp" />
+		<Unit filename="include/Components/Component.hpp" />
+		<Unit filename="include/Components/HealthComponent.hpp" />
+		<Unit filename="include/Components/SpriteComponent.hpp" />
+		<Unit filename="include/Entities/Character.hpp" />
+		<Unit filename="include/Entities/Entity.hpp" />
+		<Unit filename="include/Entities/MapTransition.hpp" />
+		<Unit filename="include/IRenderer.hpp" />
+		<Unit filename="include/SFMLRenderer.hpp" />
+		<Unit filename="include/Tilemap/TileMap.hpp" />
+		<Unit filename="include/Tilemap/TileMapRenderer.hpp" />
+		<Unit filename="include/Tilemap/TileMapSerializer.hpp" />
+		<Unit filename="include/Tilemap/TileRenderer.hpp" />
+		<Unit filename="src/CharacterRenderer.cpp" />
+		<Unit filename="src/ChunkRenderer.cpp" />
+		<Unit filename="src/Components/AnimationComponent.cpp" />
+		<Unit filename="src/Components/CollisionComponent.cpp" />
+		<Unit filename="src/Components/HealthComponent.cpp" />
+		<Unit filename="src/Components/SpriteComponent.cpp" />
+		<Unit filename="src/Entities/Entity.cpp" />
+		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/Tilemap/TileMap.cpp" />
+		<Unit filename="src/Tilemap/TileMapRenderer.cpp" />
+		<Unit filename="src/Tilemap/TileMapSerializer.cpp" />
+		<Unit filename="src/Tilemap/TileRenderer.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

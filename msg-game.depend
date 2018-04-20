@@ -1,0 +1,523 @@
+# depslib dependency file v1.0
+1524190832 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
+	<cmath>
+	<iostream>
+	<sstream>
+	<thread>
+	"SFML/Graphics/RenderWindow.hpp"
+	"SFML/Network/IpAddress.hpp"
+	"SFML/Network/Packet.hpp"
+	"SFML/Network/TcpSocket.hpp"
+	"SFML/System/Clock.hpp"
+	"SFML/Window/Event.hpp"
+	"imgui.h"
+	"imgui-SFML.h"
+	"Character.hpp"
+	"CharacterRenderer.hpp"
+	"TileMap.hpp"
+	"TileMapRenderer.hpp"
+	"TileMapSerializer.hpp"
+	"Components/AnimationComponent.hpp"
+	"Components/SpriteComponent.hpp"
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\ipaddress.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/System/Time.hpp>
+	<istream>
+	<ostream>
+	<string>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\export.hpp
+	<SFML/Config.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\config.hpp
+	"TargetConditionals.h"
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\time.hpp
+	<SFML/System/Export.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\export.hpp
+	<SFML/Config.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\packet.hpp
+	<SFML/Network/Export.hpp>
+	<string>
+	<vector>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\tcpsocket.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/Socket.hpp>
+	<SFML/System/Time.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\socket.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/SocketHandle.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<vector>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\sockethandle.hpp
+	<SFML/Config.hpp>
+	<basetsd.h>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\noncopyable.hpp
+	<SFML/System/Export.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\renderwindow.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Window/Window.hpp>
+	<string>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\export.hpp
+	<SFML/Config.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\rendertarget.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/View.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/Graphics/BlendMode.hpp>
+	<SFML/Graphics/RenderStates.hpp>
+	<SFML/Graphics/PrimitiveType.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\color.hpp
+	<SFML/Graphics/Export.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\rect.hpp
+	<SFML/System/Vector2.hpp>
+	<algorithm>
+	<SFML/Graphics/Rect.inl>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\vector2.inl
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\rect.inl
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\view.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\transform.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\blendmode.hpp
+	<SFML/Graphics/Export.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\renderstates.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/BlendMode.hpp>
+	<SFML/Graphics/Transform.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\primitivetype.hpp
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\vertex.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\image.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<string>
+	<vector>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\window.hpp
+	<SFML/Window/ContextSettings.hpp>
+	<SFML/Window/Cursor.hpp>
+	<SFML/Window/Export.hpp>
+	<SFML/Window/GlResource.hpp>
+	<SFML/Window/VideoMode.hpp>
+	<SFML/Window/WindowHandle.hpp>
+	<SFML/Window/WindowStyle.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/String.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\contextsettings.hpp
+	<SFML/Config.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\cursor.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\export.hpp
+	<SFML/Config.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\glresource.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\videomode.hpp
+	<SFML/Window/Export.hpp>
+	<vector>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\windowhandle.hpp
+	<SFML/Config.hpp>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\windowstyle.hpp
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\clock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\string.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Utf.hpp>
+	<iterator>
+	<locale>
+	<string>
+	<SFML/System/String.inl>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\utf.hpp
+	<SFML/Config.hpp>
+	<algorithm>
+	<locale>
+	<string>
+	<cstdlib>
+	<SFML/System/Utf.inl>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\utf.inl
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\string.inl
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\event.hpp
+	<SFML/Config.hpp>
+	<SFML/Window/Joystick.hpp>
+	<SFML/Window/Keyboard.hpp>
+	<SFML/Window/Mouse.hpp>
+	<SFML/Window/Sensor.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\joystick.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/String.hpp>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\keyboard.hpp
+	<SFML/Window/Export.hpp>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\mouse.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\sensor.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/Vector3.hpp>
+	<SFML/System/Time.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\vector3.inl
+
+1521140910 c:\users\tyler\documents\repos\msg-game\extlib\imgui\imgui.h
+	"imconfig.h"
+	<float.h>
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	<assert.h>
+	"imgui_user.h"
+
+1521141267 c:\users\tyler\documents\repos\msg-game\extlib\imgui\imconfig.h
+	<SFML/System/Vector2.hpp>
+	<SFML/Graphics/Color.hpp>
+
+1521141191 c:\users\tyler\documents\repos\msg-game\extlib\imgui-sfml\imgui-sfml.h
+	<SFML/System/Vector2.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/System/Time.hpp>
+
+1521140910 source:c:\users\tyler\documents\repos\msg-game\extlib\imgui\imgui.cpp
+	"imgui.h"
+	"imgui_internal.h"
+	<ctype.h>
+	<stdlib.h>
+	<stdio.h>
+	<stddef.h>
+	<stdint.h>
+	"stb_textedit.h"
+	<Windows.h>
+	<windows.h>
+	<imm.h>
+	"imgui_user.inl"
+
+1521140910 c:\users\tyler\documents\repos\msg-game\extlib\imgui\imgui_internal.h
+	<stdio.h>
+	<math.h>
+	<limits.h>
+	"stb_textedit.h"
+
+1521140910 c:\users\tyler\documents\repos\msg-game\extlib\imgui\stb_textedit.h
+	<string.h>
+
+1521140910 source:c:\users\tyler\documents\repos\msg-game\extlib\imgui\imgui_draw.cpp
+	"imgui.h"
+	"imgui_internal.h"
+	<stdio.h>
+	<malloc.h>
+	<alloca.h>
+	<stdlib.h>
+	"stb_rect_pack.h"
+	"stb_truetype.h"
+
+1521140910 c:\users\tyler\documents\repos\msg-game\extlib\imgui\stb_rect_pack.h
+	<stdlib.h>
+	<assert.h>
+
+1521140910 c:\users\tyler\documents\repos\msg-game\extlib\imgui\stb_truetype.h
+	"stb_truetype.h"
+	<stdio.h>
+	"stb_truetype.h"
+	<math.h>
+	<math.h>
+	<math.h>
+	<math.h>
+	<math.h>
+	<stdlib.h>
+	<assert.h>
+	<string.h>
+	<string.h>
+
+1521151034 source:c:\users\tyler\documents\repos\msg-game\extlib\imgui-sfml\imgui-sfml.cpp
+	"imgui-SFML.h"
+	<imgui.h>
+	<SFML/OpenGL.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/Graphics/RenderWindow.hpp>
+	<SFML/Graphics/Sprite.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Window/Event.hpp>
+	<SFML/Window/Window.hpp>
+	<cmath>
+	<cstddef>
+	<cassert>
+	<SFML/Window/Touch.hpp>
+	<jni.h>
+	<android/native_activity.h>
+	<SFML/System/NativeActivity.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\opengl.hpp
+	<SFML/Config.hpp>
+	<windows.h>
+	<GL/gl.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<OpenGLES/ES1/gl.h>
+	<OpenGLES/ES1/glext.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GLES2/gl2ext.h>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\sprite.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/Graphics/Rect.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\drawable.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/RenderStates.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\transformable.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Transform.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\texture.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Window/GlResource.hpp>
+
+1506471375 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\window\touch.hpp
+	<SFML/Window/Export.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\system\nativeactivity.hpp
+	<SFML/System/Export.hpp>
+
+1521758119 c:\users\tyler\documents\repos\msg-game\include\tilemap.hpp
+	<string>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\rectangleshape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Shape.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\shape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/VertexArray.hpp>
+	<SFML/System/Vector2.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\vertexarray.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/Graphics/PrimitiveType.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<vector>
+
+1521651787 source:c:\users\tyler\documents\repos\msg-game\src\tilemap.cpp
+	"TileMap.hpp"
+
+1521650790 source:c:\users\tyler\documents\repos\msg-game\src\tilerenderer.cpp
+	"TileRenderer.hpp"
+	"SFML/Graphics/Sprite.hpp"
+
+1521580570 c:\users\tyler\documents\repos\msg-game\include\tilerenderer.hpp
+	"SFML/Graphics/RenderTarget.hpp"
+	"SFML/Graphics/Texture.hpp"
+	"TileMap.hpp"
+
+1521652423 source:c:\users\tyler\documents\repos\msg-game\src\tilemaprenderer.cpp
+	"TileMapRenderer.hpp"
+	"SFML/Graphics/RectangleShape.hpp"
+	"SFML/Graphics/RenderTarget.hpp"
+	"SFML/Graphics/Sprite.hpp"
+	"TileRenderer.hpp"
+
+1521652426 c:\users\tyler\documents\repos\msg-game\include\tilemaprenderer.hpp
+	"SFML/Graphics/RenderTexture.hpp"
+	"TileMap.hpp"
+	"TileRenderer.hpp"
+
+1521765258 c:\users\tyler\documents\repos\msg-game\include\character.hpp
+	"Entity.hpp"
+
+1521585047 c:\users\tyler\documents\repos\msg-game\include\characterrenderer.hpp
+	"SFML/Graphics/CircleShape.hpp"
+	"SFML/Graphics/RenderTarget.hpp"
+	"Character.hpp"
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\circleshape.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Shape.hpp>
+
+1521589583 source:c:\users\tyler\documents\repos\msg-game\src\characterrenderer.cpp
+	"CharacterRenderer.hpp"
+
+1521758108 source:c:\users\tyler\documents\repos\msg-game\src\tilemapserializer.cpp
+	"TileMapSerializer.hpp"
+	<fstream>
+	<sstream>
+
+1521587019 c:\users\tyler\documents\repos\msg-game\include\tilemapserializer.hpp
+	<string>
+	"TileMap.hpp"
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\rendertexture.hpp
+	<SFML/Graphics/Export.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+
+1521652338 source:c:\users\tyler\documents\repos\msg-game\src\chunkrenderer.cpp
+	"ChunkRenderer.hpp"
+
+1521652447 c:\users\tyler\documents\repos\msg-game\include\chunkrenderer.hpp
+	"SFML/Graphics/RenderTarget.hpp"
+	"SFML/Graphics/RenderTexture.hpp"
+	"TileMap.hpp"
+
+1524190564 c:\users\tyler\documents\repos\msg-game\include\entity.hpp
+	<memory>
+	<vector>
+	"SFML/System/Vector2.hpp"
+	"Components/Component.hpp"
+
+1521777510 c:\users\tyler\documents\repos\msg-game\include\component.hpp
+
+1524190672 c:\users\tyler\documents\repos\msg-game\include\components\component.hpp
+
+1524192276 source:c:\users\tyler\documents\repos\msg-game\src\components\animationcomponent.cpp
+	"Components/AnimationComponent.hpp"
+	"Entity.hpp"
+
+1524192160 c:\users\tyler\documents\repos\msg-game\include\components\animationcomponent.hpp
+	"Component.hpp"
+	"SpriteComponent.hpp"
+
+1524190612 source:c:\users\tyler\documents\repos\msg-game\src\entity.cpp
+	"Entity.hpp"
+
+1524190346 source:c:\users\tyler\documents\repos\msg-game\src\components\healthcomponent.cpp
+	"Components/HealthComponent.hpp"
+
+1524190178 c:\users\tyler\documents\repos\msg-game\include\components\healthcomponent.hpp
+	"Component.hpp"
+
+1524192312 c:\users\tyler\documents\repos\msg-game\include\components\spritecomponent.hpp
+	"SFML/Graphics/Sprite.hpp"
+	"Component.hpp"
+
+1524191391 source:c:\users\tyler\documents\repos\msg-game\src\components\spritecomponent.cpp
+	"Components/SpriteComponent.hpp"
+	"Entity.hpp"
+
+1524192939 source:c:\users\tyler\documents\repos\msg-game\src\entities\entity.cpp
+	"Entities/Entity.hpp"
+
+1524190564 c:\users\tyler\documents\repos\msg-game\include\entities\entity.hpp
+	<memory>
+	<vector>
+	"SFML/System/Vector2.hpp"
+	"Components/Component.hpp"
+
+1524192948 source:c:\users\tyler\documents\repos\msg-game\src\tilemap\tilemap.cpp
+	"Tilemap/TileMap.hpp"
+
+1521758119 c:\users\tyler\documents\repos\msg-game\include\tilemap\tilemap.hpp
+	<string>
+
+1524192959 source:c:\users\tyler\documents\repos\msg-game\src\tilemap\tilemaprenderer.cpp
+	"Tilemap/TileMapRenderer.hpp"
+	"SFML/Graphics/RectangleShape.hpp"
+	"SFML/Graphics/RenderTarget.hpp"
+	"SFML/Graphics/Sprite.hpp"
+	"Tilemap/TileRenderer.hpp"
+
+1521652426 c:\users\tyler\documents\repos\msg-game\include\tilemap\tilemaprenderer.hpp
+	"SFML/Graphics/RenderTexture.hpp"
+	"TileMap.hpp"
+	"TileRenderer.hpp"
+
+1521580570 c:\users\tyler\documents\repos\msg-game\include\tilemap\tilerenderer.hpp
+	"SFML/Graphics/RenderTarget.hpp"
+	"SFML/Graphics/Texture.hpp"
+	"TileMap.hpp"
+
+1524192964 source:c:\users\tyler\documents\repos\msg-game\src\tilemap\tilemapserializer.cpp
+	"Tilemap/TileMapSerializer.hpp"
+	<fstream>
+	<sstream>
+
+1521587019 c:\users\tyler\documents\repos\msg-game\include\tilemap\tilemapserializer.hpp
+	<string>
+	"TileMap.hpp"
+
+1524192968 source:c:\users\tyler\documents\repos\msg-game\src\tilemap\tilerenderer.cpp
+	"Tilemap/TileRenderer.hpp"
+	"SFML/Graphics/Sprite.hpp"
+
+1524193365 source:c:\users\tyler\documents\repos\msg-game\src\components\collisioncomponent.cpp
+	"Components/CollisionComponent.hpp"
+
+1524193360 c:\users\tyler\documents\repos\msg-game\include\components\collisioncomponent.hpp
+	<functional>
+	"Components/Component.hpp"
+
