@@ -1,6 +1,6 @@
 #include "Components/AnimationComponent.hpp"
 
-#include "Entity.hpp"
+#include "Entities/Entity.hpp"
 
 AnimationComponent::AnimationComponent()
 {

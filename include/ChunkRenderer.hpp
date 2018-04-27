@@ -4,7 +4,7 @@
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "SFML/Graphics/RenderTexture.hpp"
 
-#include "TileMap.hpp"
+#include "Tilemap/TileMap.hpp"
 
 class ChunkRenderer
 {

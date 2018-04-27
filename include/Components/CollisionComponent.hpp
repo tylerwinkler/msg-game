@@ -8,6 +8,10 @@
 class CollisionComponent : public Component
 {
 public:
+    CollisionComponent();
+    CollisionComponent(int x, int y, int width, int height);
+
+public:
     int x;
     int y;
     int width;

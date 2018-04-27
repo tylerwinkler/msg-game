@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1524190832 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
+1524809940 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
 	<cmath>
 	<iostream>
 	<sstream>
 	<thread>
+	"SFML/Graphics/Color.hpp"
+	"SFML/Graphics/RectangleShape.hpp"
 	"SFML/Graphics/RenderWindow.hpp"
 	"SFML/Network/IpAddress.hpp"
 	"SFML/Network/Packet.hpp"
@@ -12,13 +14,17 @@
 	"SFML/Window/Event.hpp"
 	"imgui.h"
 	"imgui-SFML.h"
-	"Character.hpp"
+	"Entities/EntityFactory.hpp"
+	"Entities/Character.hpp"
 	"CharacterRenderer.hpp"
-	"TileMap.hpp"
-	"TileMapRenderer.hpp"
-	"TileMapSerializer.hpp"
+	"Tilemap/TileMap.hpp"
+	"Tilemap/TileMapRenderer.hpp"
+	"Tilemap/TileMapSerializer.hpp"
 	"Components/AnimationComponent.hpp"
+	"Components/CollisionComponent.hpp"
 	"Components/SpriteComponent.hpp"
+	"Components/ComponentFactory.hpp"
+	"Player.hpp"
 
 1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\ipaddress.hpp
 	<SFML/Network/Export.hpp>
@@ -400,16 +406,16 @@
 1521765258 c:\users\tyler\documents\repos\msg-game\include\character.hpp
 	"Entity.hpp"
 
-1521585047 c:\users\tyler\documents\repos\msg-game\include\characterrenderer.hpp
+1524792795 c:\users\tyler\documents\repos\msg-game\include\characterrenderer.hpp
 	"SFML/Graphics/CircleShape.hpp"
 	"SFML/Graphics/RenderTarget.hpp"
-	"Character.hpp"
+	"Entities/Character.hpp"
 
 1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\circleshape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Shape.hpp>
 
-1521589583 source:c:\users\tyler\documents\repos\msg-game\src\characterrenderer.cpp
+1524795246 source:c:\users\tyler\documents\repos\msg-game\src\characterrenderer.cpp
 	"CharacterRenderer.hpp"
 
 1521758108 source:c:\users\tyler\documents\repos\msg-game\src\tilemapserializer.cpp
@@ -429,10 +435,10 @@
 1521652338 source:c:\users\tyler\documents\repos\msg-game\src\chunkrenderer.cpp
 	"ChunkRenderer.hpp"
 
-1521652447 c:\users\tyler\documents\repos\msg-game\include\chunkrenderer.hpp
+1524792804 c:\users\tyler\documents\repos\msg-game\include\chunkrenderer.hpp
 	"SFML/Graphics/RenderTarget.hpp"
 	"SFML/Graphics/RenderTexture.hpp"
-	"TileMap.hpp"
+	"Tilemap/TileMap.hpp"
 
 1524190564 c:\users\tyler\documents\repos\msg-game\include\entity.hpp
 	<memory>
@@ -442,11 +448,11 @@
 
 1521777510 c:\users\tyler\documents\repos\msg-game\include\component.hpp
 
-1524190672 c:\users\tyler\documents\repos\msg-game\include\components\component.hpp
+1524794348 c:\users\tyler\documents\repos\msg-game\include\components\component.hpp
 
-1524192276 source:c:\users\tyler\documents\repos\msg-game\src\components\animationcomponent.cpp
+1524792799 source:c:\users\tyler\documents\repos\msg-game\src\components\animationcomponent.cpp
 	"Components/AnimationComponent.hpp"
-	"Entity.hpp"
+	"Entities/Entity.hpp"
 
 1524192160 c:\users\tyler\documents\repos\msg-game\include\components\animationcomponent.hpp
 	"Component.hpp"
@@ -465,16 +471,16 @@
 	"SFML/Graphics/Sprite.hpp"
 	"Component.hpp"
 
-1524191391 source:c:\users\tyler\documents\repos\msg-game\src\components\spritecomponent.cpp
+1524792810 source:c:\users\tyler\documents\repos\msg-game\src\components\spritecomponent.cpp
 	"Components/SpriteComponent.hpp"
-	"Entity.hpp"
-
-1524192939 source:c:\users\tyler\documents\repos\msg-game\src\entities\entity.cpp
 	"Entities/Entity.hpp"
 
-1524190564 c:\users\tyler\documents\repos\msg-game\include\entities\entity.hpp
+1524809856 source:c:\users\tyler\documents\repos\msg-game\src\entities\entity.cpp
+	"Entities/Entity.hpp"
+
+1524809676 c:\users\tyler\documents\repos\msg-game\include\entities\entity.hpp
+	<map>
 	<memory>
-	<vector>
 	"SFML/System/Vector2.hpp"
 	"Components/Component.hpp"
 
@@ -501,7 +507,7 @@
 	"SFML/Graphics/Texture.hpp"
 	"TileMap.hpp"
 
-1524192964 source:c:\users\tyler\documents\repos\msg-game\src\tilemap\tilemapserializer.cpp
+1524696626 source:c:\users\tyler\documents\repos\msg-game\src\tilemap\tilemapserializer.cpp
 	"Tilemap/TileMapSerializer.hpp"
 	<fstream>
 	<sstream>
@@ -514,10 +520,37 @@
 	"Tilemap/TileRenderer.hpp"
 	"SFML/Graphics/Sprite.hpp"
 
-1524193365 source:c:\users\tyler\documents\repos\msg-game\src\components\collisioncomponent.cpp
+1524809878 source:c:\users\tyler\documents\repos\msg-game\src\components\collisioncomponent.cpp
 	"Components/CollisionComponent.hpp"
 
-1524193360 c:\users\tyler\documents\repos\msg-game\include\components\collisioncomponent.hpp
+1524794566 c:\users\tyler\documents\repos\msg-game\include\components\collisioncomponent.hpp
 	<functional>
 	"Components/Component.hpp"
+
+1524809288 source:c:\users\tyler\documents\repos\msg-game\src\entities\entityfactory.cpp
+	"Entities/EntityFactory.hpp"
+	"Components/CollisionComponent.hpp"
+	"Components/ComponentFactory.hpp"
+
+1524794807 c:\users\tyler\documents\repos\msg-game\include\entities\entityfactory.hpp
+	"Entities/Entity.hpp"
+
+1524795109 source:c:\users\tyler\documents\repos\msg-game\src\components\componentfactory.cpp
+	"Components/ComponentFactory.hpp"
+	"Components/AnimationComponent.hpp"
+	"Components/CollisionComponent.hpp"
+	"Components/HealthComponent.hpp"
+	"Components/SpriteComponent.hpp"
+
+1524792735 c:\users\tyler\documents\repos\msg-game\include\components\componentfactory.hpp
+	<memory>
+	"Components/Component.hpp"
+
+1521765258 c:\users\tyler\documents\repos\msg-game\include\entities\character.hpp
+	"Entity.hpp"
+
+1524809591 source:c:\users\tyler\documents\repos\msg-game\src\player.cpp
+	"Player.hpp"
+
+1524809659 c:\users\tyler\documents\repos\msg-game\include\player.hpp
 

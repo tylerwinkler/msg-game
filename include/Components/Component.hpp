@@ -8,6 +8,7 @@ namespace ComponentType
     enum
     {
         AnimationComponent,
+        CollisionComponent,
         HealthComponent,
         SpriteComponent,
     };

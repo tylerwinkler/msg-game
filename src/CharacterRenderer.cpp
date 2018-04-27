@@ -1,6 +1,5 @@
 #include "CharacterRenderer.hpp"
 
-
 void CharacterRenderer::setCircle(int radius, sf::Color color)
 {
     m_circle.setRadius(radius);

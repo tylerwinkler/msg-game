@@ -3,6 +3,8 @@
 #include <sstream>
 #include <thread>
 
+#include "SFML/Graphics/Color.hpp"
+#include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 
 #include "SFML/Network/IpAddress.hpp"
@@ -16,18 +18,25 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
-#include "Character.hpp"
+#include "Entities/EntityFactory.hpp"
+#include "Entities/Character.hpp"
 #include "CharacterRenderer.hpp"
 
-#include "TileMap.hpp"
-#include "TileMapRenderer.hpp"
-#include "TileMapSerializer.hpp"
+#include "Tilemap/TileMap.hpp"
+#include "Tilemap/TileMapRenderer.hpp"
+#include "Tilemap/TileMapSerializer.hpp"
 
 #include "Components/AnimationComponent.hpp"
+#include "Components/CollisionComponent.hpp"
 #include "Components/SpriteComponent.hpp"
+#include "Components/ComponentFactory.hpp"
+
+#include "Player.hpp"
 
 int main(int argc, char* argv[])
 {
+    const int CanSwim = false;
+
     sf::RenderWindow window;
     window.create(sf::VideoMode(800, 600, 32), "MSG");
     window.setFramerateLimit(80);
@@ -54,11 +63,8 @@ int main(int argc, char* argv[])
     CharacterRenderer characterRenderer;
     characterRenderer.setCircle(10, sf::Color::Blue);
 
-    std::unique_ptr<Component> animationComponent(new AnimationComponent);
-    character.addComponent(animationComponent);
-
-    std::unique_ptr<Component> spriteComponent(new SpriteComponent);
-    character.addComponent(spriteComponent);
+    character.addComponent(ComponentFactory::createAnimationComponent());
+    character.addComponent(ComponentFactory::createSpriteComponent());
 
     if (!character.init())
     {
@@ -75,6 +81,22 @@ int main(int argc, char* argv[])
     float health = 1.0;
 
     std::string action = "Idle";
+
+    Entity trans = EntityFactory::createMapTransition(0);
+    CollisionComponent& comp = dynamic_cast<CollisionComponent&>(trans.getComponentByType(ComponentType::CollisionComponent));
+
+        Player player;
+
+    comp.setCollisionFunc([&]{
+                            player.addGold(5);
+                          });
+
+    sf::RectangleShape rect;
+    rect.setPosition(comp.x, comp.y);
+    rect.setSize(sf::Vector2f(comp.width, comp.height));
+    rect.setFillColor(sf::Color(200, 0, 0, 150));
+    rect.setOutlineColor(sf::Color(200, 0, 0, 250));
+    rect.setOutlineThickness(5.f);
 
     sf::Clock deltaClock;
     while (window.isOpen())
@@ -188,7 +210,14 @@ int main(int argc, char* argv[])
         switch (id)
         {
         case Tile::WATER:
-            action = "Swimming";
+            if (CanSwim)
+            {
+                action = "Swimming";
+            }
+            else
+            {
+                velocity = sf::Vector2f(0, 0);
+            }
             break;
         case Tile::LAVA:
             action = "Burning";
@@ -211,6 +240,11 @@ int main(int argc, char* argv[])
 
         camera.setCenter(character.position);
 
+        if (rect.getGlobalBounds().contains(character.position))
+        {
+            comp.onCollision();
+        }
+
         // Player stats
         ImGui::Begin("");
         ImGui::Text(std::string("Status: " + action).c_str());
@@ -226,6 +260,9 @@ int main(int argc, char* argv[])
         {
             ImGui::Text("You are dead");
         }
+        std::stringstream ss;
+        ss << player.getGold();
+        ImGui::Text(std::string("Gold: " + ss.str()).c_str());
         ImGui::End();
 
         ImGui::Begin("Tilemap Editor!");
@@ -266,6 +303,8 @@ int main(int argc, char* argv[])
         mapRenderer.render(window, map);
 
         characterRenderer.render(window, character);
+
+        window.draw(rect);
 
         ImGui::SFML::Render(window);
 

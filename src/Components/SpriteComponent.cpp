@@ -1,6 +1,6 @@
 #include "Components/SpriteComponent.hpp"
 
-#include "Entity.hpp"
+#include "Entities/Entity.hpp"
 
 SpriteComponent::SpriteComponent()
 {

@@ -4,7 +4,7 @@
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-#include "Character.hpp"
+#include "Entities/Character.hpp"
 
 class CharacterRenderer
 {
