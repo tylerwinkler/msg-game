@@ -8,6 +8,8 @@ class HealthComponent : public Component
 public:
     HealthComponent();
 
+    float hp;
+
 public:
     bool init(Entity& owner);
 

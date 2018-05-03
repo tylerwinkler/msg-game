@@ -1,26 +1,16 @@
 #include "Player.hpp"
 
-int Player::getGold()
+Inventory& Player::getInventory()
 {
-    return m_gold;
+    return m_inventory;
 }
 
-void Player::setGold(int gold)
+Wallet& Player::getWallet()
 {
-    m_gold = gold;
+    return m_wallet;
 }
 
-void Player::addGold(int gold)
+Entity& Player::getCharacter()
 {
-    m_gold += gold;
-}
-
-void Player::removeGold(int gold)
-{
-    m_gold -= gold;
-}
-
-bool Player::hasGold(int gold)
-{
-    return m_gold >= gold;
+    return m_character;
 }

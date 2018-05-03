@@ -8,7 +8,7 @@ Entity EntityFactory::createMapTransition(int transitionId)
 {
     Entity entity;
 
-    entity.addComponent(ComponentFactory::createCollisionComponent());
+    entity.addComponent(ComponentFactory::createCollisionComponent(-24, -24, 48, 48));
 
     Component& comp = entity.getComponentByType(ComponentType::CollisionComponent);
 
@@ -21,6 +21,23 @@ Entity EntityFactory::createMapTransition(int transitionId)
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Map Transition Entity");
+    }
+
+    return entity;
+}
+
+Entity EntityFactory::createCharacter(int characterId)
+{
+    Entity entity;
+
+    entity.addComponent(ComponentFactory::createAnimationComponent());
+    entity.addComponent(ComponentFactory::createCollisionComponent());
+    entity.addComponent(ComponentFactory::createHealthComponent());
+    entity.addComponent(ComponentFactory::createSpriteComponent());
+
+    if (!entity.init())
+    {
+        throw std::logic_error("Failed to init Character Entity");
     }
 
     return entity;

@@ -4,14 +4,14 @@
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-#include "Entities/Character.hpp"
+#include "Entities/Entity.hpp"
 
 class CharacterRenderer
 {
 public:
     void setCircle(int radius, sf::Color color);
 
-    void render(sf::RenderTarget& target, const Character& character);
+    void render(sf::RenderTarget& target, const Entity& character);
 
 private:
     sf::CircleShape m_circle;

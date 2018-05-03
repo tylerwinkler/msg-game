@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1524809940 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
+1525311034 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
 	<cmath>
 	<iostream>
 	<sstream>
@@ -15,16 +15,22 @@
 	"imgui.h"
 	"imgui-SFML.h"
 	"Entities/EntityFactory.hpp"
-	"Entities/Character.hpp"
 	"CharacterRenderer.hpp"
 	"Tilemap/TileMap.hpp"
 	"Tilemap/TileMapRenderer.hpp"
 	"Tilemap/TileMapSerializer.hpp"
 	"Components/AnimationComponent.hpp"
 	"Components/CollisionComponent.hpp"
+	"Components/HealthComponent.hpp"
 	"Components/SpriteComponent.hpp"
 	"Components/ComponentFactory.hpp"
+	"Console.hpp"
+	"IMouseEventListener.hpp"
 	"Player.hpp"
+	"TextureManager.hpp"
+	"TilemapEditor.hpp"
+	"Global.hpp"
+	"GameEngine.hpp"
 
 1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\network\ipaddress.hpp
 	<SFML/Network/Export.hpp>
@@ -406,16 +412,16 @@
 1521765258 c:\users\tyler\documents\repos\msg-game\include\character.hpp
 	"Entity.hpp"
 
-1524792795 c:\users\tyler\documents\repos\msg-game\include\characterrenderer.hpp
+1525190413 c:\users\tyler\documents\repos\msg-game\include\characterrenderer.hpp
 	"SFML/Graphics/CircleShape.hpp"
 	"SFML/Graphics/RenderTarget.hpp"
-	"Entities/Character.hpp"
+	"Entities/Entity.hpp"
 
 1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\graphics\circleshape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Shape.hpp>
 
-1524795246 source:c:\users\tyler\documents\repos\msg-game\src\characterrenderer.cpp
+1525190422 source:c:\users\tyler\documents\repos\msg-game\src\characterrenderer.cpp
 	"CharacterRenderer.hpp"
 
 1521758108 source:c:\users\tyler\documents\repos\msg-game\src\tilemapserializer.cpp
@@ -461,10 +467,10 @@
 1524190612 source:c:\users\tyler\documents\repos\msg-game\src\entity.cpp
 	"Entity.hpp"
 
-1524190346 source:c:\users\tyler\documents\repos\msg-game\src\components\healthcomponent.cpp
+1525194460 source:c:\users\tyler\documents\repos\msg-game\src\components\healthcomponent.cpp
 	"Components/HealthComponent.hpp"
 
-1524190178 c:\users\tyler\documents\repos\msg-game\include\components\healthcomponent.hpp
+1525194190 c:\users\tyler\documents\repos\msg-game\include\components\healthcomponent.hpp
 	"Component.hpp"
 
 1524192312 c:\users\tyler\documents\repos\msg-game\include\components\spritecomponent.hpp
@@ -527,30 +533,85 @@
 	<functional>
 	"Components/Component.hpp"
 
-1524809288 source:c:\users\tyler\documents\repos\msg-game\src\entities\entityfactory.cpp
+1525195912 source:c:\users\tyler\documents\repos\msg-game\src\entities\entityfactory.cpp
 	"Entities/EntityFactory.hpp"
 	"Components/CollisionComponent.hpp"
 	"Components/ComponentFactory.hpp"
 
-1524794807 c:\users\tyler\documents\repos\msg-game\include\entities\entityfactory.hpp
+1525194276 c:\users\tyler\documents\repos\msg-game\include\entities\entityfactory.hpp
 	"Entities/Entity.hpp"
 
-1524795109 source:c:\users\tyler\documents\repos\msg-game\src\components\componentfactory.cpp
+1525195770 source:c:\users\tyler\documents\repos\msg-game\src\components\componentfactory.cpp
 	"Components/ComponentFactory.hpp"
 	"Components/AnimationComponent.hpp"
 	"Components/CollisionComponent.hpp"
 	"Components/HealthComponent.hpp"
 	"Components/SpriteComponent.hpp"
 
-1524792735 c:\users\tyler\documents\repos\msg-game\include\components\componentfactory.hpp
+1525195770 c:\users\tyler\documents\repos\msg-game\include\components\componentfactory.hpp
 	<memory>
 	"Components/Component.hpp"
 
 1521765258 c:\users\tyler\documents\repos\msg-game\include\entities\character.hpp
 	"Entity.hpp"
 
-1524809591 source:c:\users\tyler\documents\repos\msg-game\src\player.cpp
+1525190797 source:c:\users\tyler\documents\repos\msg-game\src\player.cpp
 	"Player.hpp"
 
-1524809659 c:\users\tyler\documents\repos\msg-game\include\player.hpp
+1525190742 c:\users\tyler\documents\repos\msg-game\include\player.hpp
+	"Entities/Entity.hpp"
+	"Inventory.hpp"
+	"Wallet.hpp"
+
+1525124265 c:\users\tyler\documents\repos\msg-game\include\wallet.hpp
+
+1525124321 source:c:\users\tyler\documents\repos\msg-game\src\wallet.cpp
+	"Wallet.hpp"
+
+1525190761 c:\users\tyler\documents\repos\msg-game\include\inventory.hpp
+	<string>
+	<vector>
+
+1525190772 source:c:\users\tyler\documents\repos\msg-game\src\inventory.cpp
+	"Inventory.hpp"
+
+1525210106 source:c:\users\tyler\documents\repos\msg-game\src\console.cpp
+	"Console.hpp"
+	<string>
+	"imgui.h"
+	"imgui-SFML.h"
+
+1525210293 c:\users\tyler\documents\repos\msg-game\include\console.hpp
+	<functional>
+	<map>
+	<string>
+
+1525220073 c:\users\tyler\documents\repos\msg-game\include\imouseeventlistener.hpp
+	"SFML/Window/Mouse.hpp"
+
+1525220061 c:\users\tyler\documents\repos\msg-game\include\tilemapeditor.hpp
+	"IMouseEventListener.hpp"
+
+1525220799 source:c:\users\tyler\documents\repos\msg-game\src\tilemapeditor.cpp
+	"TilemapEditor.hpp"
+	<stdexcept>
+
+1525225543 source:c:\users\tyler\documents\repos\msg-game\src\texturemanager.cpp
+	"TextureManager.hpp"
+
+1525225507 c:\users\tyler\documents\repos\msg-game\include\texturemanager.hpp
+	<map>
+	"SFML/Graphics/Texture.hpp"
+
+1525287523 source:c:\users\tyler\documents\repos\msg-game\src\global.cpp
+	"Global.hpp"
+	"GameEngine.hpp"
+
+1525287032 c:\users\tyler\documents\repos\msg-game\include\global.hpp
+
+1525287352 c:\users\tyler\documents\repos\msg-game\include\gameengine.hpp
+
+1525287368 source:c:\users\tyler\documents\repos\msg-game\src\gameengine.cpp
+	"GameEngine.hpp"
+	"TextureManager.hpp"
 

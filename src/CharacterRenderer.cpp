@@ -8,7 +8,7 @@ void CharacterRenderer::setCircle(int radius, sf::Color color)
     m_circle.setOrigin(radius, radius);
 }
 
-void CharacterRenderer::render(sf::RenderTarget& target, const Character& character)
+void CharacterRenderer::render(sf::RenderTarget& target, const Entity& character)
 {
     m_circle.setPosition(character.position);
 

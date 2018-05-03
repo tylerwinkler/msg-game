@@ -1,17 +1,26 @@
 #ifndef MSG_GAME_PLAYER_HPP
 #define MSG_GAME_PLAYER_HPP
 
+#include "Entities/Entity.hpp"
+
+#include "Inventory.hpp"
+#include "Wallet.hpp"
+
 class Player
 {
 public:
-    int getGold();
-    void setGold(int gold);
-    void addGold(int gold);
-    void removeGold(int gold);
-    bool hasGold(int gold);
+    Inventory& getInventory();
+
+    Wallet& getWallet();
+
+    Entity& getCharacter();
 
 private:
-    int m_gold;
+    Inventory m_inventory;
+
+    Wallet m_wallet;
+
+    Entity m_character;
 }; // Player
 
 #endif // MSG_GAME_PLAYER_HPP
