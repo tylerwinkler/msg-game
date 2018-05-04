@@ -210,14 +210,6 @@ int main(int argc, char* argv[])
                 }
                 break;
             case sf::Event::KeyPressed:
-                if (console.isOpen())
-                {
-                    if (event.key.code == sf::Keyboard::Tilde)
-                    {
-                        console.toggle();
-                    }
-                    continue;
-                }
                 switch (event.key.code)
                 {
                 case sf::Keyboard::W:
@@ -438,6 +430,7 @@ int main(int argc, char* argv[])
         if (console.isOpen())
         {
             console.draw();
+            ImGui::SetKeyboardFocusHere(0);
         }
 
         window.clear();

@@ -27,7 +27,7 @@ bool Console::isOpen()
 
 void Console::open()
 {
-    m_open =true;
+    m_open = true;
 }
 
 void Console::close()

@@ -1,9 +1,12 @@
 # depslib dependency file v1.0
-1525311034 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
+1525365038 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
 	<cmath>
 	<iostream>
 	<sstream>
 	<thread>
+	"SFML/Audio/Listener.hpp"
+	"SFML/Audio/Sound.hpp"
+	"SFML/Audio/SoundBuffer.hpp"
 	"SFML/Graphics/Color.hpp"
 	"SFML/Graphics/RectangleShape.hpp"
 	"SFML/Graphics/RenderWindow.hpp"
@@ -575,7 +578,7 @@
 1525190772 source:c:\users\tyler\documents\repos\msg-game\src\inventory.cpp
 	"Inventory.hpp"
 
-1525210106 source:c:\users\tyler\documents\repos\msg-game\src\console.cpp
+1525364707 source:c:\users\tyler\documents\repos\msg-game\src\console.cpp
 	"Console.hpp"
 	<string>
 	"imgui.h"
@@ -614,4 +617,33 @@
 1525287368 source:c:\users\tyler\documents\repos\msg-game\src\gameengine.cpp
 	"GameEngine.hpp"
 	"TextureManager.hpp"
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
 
