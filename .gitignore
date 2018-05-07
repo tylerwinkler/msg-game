@@ -34,3 +34,6 @@
 # IDE files
 *.depend
 *.layout
+
+# imgui
+imgui.ini
