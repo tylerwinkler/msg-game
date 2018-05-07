@@ -148,38 +148,16 @@ int main(int argc, char* argv[])
 
     sf::Sprite lightmapSprite;
 
-    sf::Listener::setDirection(1.f, 0.f, 0.f);
-    sf::Listener::setUpVector(0.f, 1.f, 0.f);
-    sf::Listener::setGlobalVolume(50.f);
+    sf::SoundBuffer buffer;
+    buffer.loadFromFile("./assets/sound/waterfall_.ogg");
 
-    sf::SoundBuffer originalBuffer;
-    originalBuffer.loadFromFile("./assets/sound/waterfall_.ogg");
-    // set up original buffer here - assumed to be stereo during this example
-    const sf::Int16* originalSamples{ originalBuffer.getSamples() };
-    const sf::Uint64 sizeOfSingleChannel{ originalBuffer.getSampleCount() / 2u };
-    sf::Int16* leftSamples{ new sf::Int16[sizeOfSingleChannel] };
-    sf::Int16* rightSamples{ new sf::Int16[sizeOfSingleChannel] };
-    for (sf::Uint64 i{ 0u }; i < sizeOfSingleChannel; ++i)
-    {
-        leftSamples[i] = originalSamples[i * 2u];
-        rightSamples[i] = originalSamples[i * 2u + 1u];
-    }
-    sf::SoundBuffer leftBuffer;
-    sf::SoundBuffer rightBuffer;
-    leftBuffer.loadFromSamples(leftSamples, sizeOfSingleChannel, 1u, originalBuffer.getSampleRate());
-    rightBuffer.loadFromSamples(rightSamples, sizeOfSingleChannel, 1u, originalBuffer.getSampleRate());
+    sf::Sound sound;
+    sound.setBuffer(buffer);
 
-    sf::Sound sound[2];
-    sound[0].setBuffer(leftBuffer);
-    sound[1].setBuffer(rightBuffer);
-    for (int i = 0; i < 2; ++i)
-    {
-        sound[i].setPosition(300.f, 0.f, 300.f);
-        sound[i].setLoop(true);
-        sound[i].setAttenuation(0.05f);
-        sound[i].play();
-    }
-
+    sound.setPosition(300.f, 0.f, 300.f);
+    sound.setVolume(0.3f);
+    sound.setLoop(true);
+    sound.play();
 
     while (running)
     {

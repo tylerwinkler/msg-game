@@ -7,6 +7,9 @@
 class AnimationComponent : public Component
 {
 public:
+    friend class AnimationSystem;
+
+public:
     AnimationComponent();
 
 public:

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1525365038 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
+1525671418 source:c:\users\tyler\documents\repos\msg-game\src\main.cpp
 	<cmath>
 	<iostream>
 	<sstream>
@@ -463,7 +463,7 @@
 	"Components/AnimationComponent.hpp"
 	"Entities/Entity.hpp"
 
-1524192160 c:\users\tyler\documents\repos\msg-game\include\components\animationcomponent.hpp
+1525656693 c:\users\tyler\documents\repos\msg-game\include\components\animationcomponent.hpp
 	"Component.hpp"
 	"SpriteComponent.hpp"
 
@@ -646,4 +646,11 @@
 1506471374 c:\users\tyler\documents\repos\msg-game\extlib\sfml\include\sfml\audio\listener.hpp
 	<SFML/Audio/Export.hpp>
 	<SFML/System/Vector3.hpp>
+
+1525657043 source:c:\users\tyler\documents\repos\msg-game\src\systems\animationsystem.cpp
+	"Systems/AnimationSystem.hpp"
+	"Components/AnimationComponent.hpp"
+
+1525656926 c:\users\tyler\documents\repos\msg-game\include\systems\animationsystem.hpp
+	<vector>
 
