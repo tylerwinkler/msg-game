@@ -2,9 +2,17 @@
 
 #include "Components/AnimationComponent.hpp"
 
-void AnimationSystem::update(sf::Time& t)
-{
+#include <iostream>
 
+void AnimationSystem::update(float time)
+{
+    int i = 0;
+    for (auto animation : m_animations)
+    {
+        std::cout << "Updating animation #" << ++i << "\n";
+        animation->update(time);
+    }
+    std::cout << "\n";
 }
 
 void AnimationSystem::addComponent(AnimationComponent* component)

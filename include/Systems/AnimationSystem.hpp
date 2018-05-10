@@ -9,7 +9,7 @@ namespace sf { class Time; }
 class AnimationSystem
 {
 public:
-    void update(sf::Time& t);
+    void update(float time);
 
     void addComponent(AnimationComponent* component);
 

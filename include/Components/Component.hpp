@@ -19,11 +19,16 @@ class Component
 public:
     int type;
 
-    virtual bool init(Entity& owner){return true;}
+    bool init(Entity& owner);
 
-    virtual void update(Entity& owner){}
+private:
+    virtual bool onInit(Entity& owner){return true;}
 
-    virtual void render(Entity& owner){}
+protected:
+    Entity* const getOwner();
+
+private:
+    Entity* m_owner;
 }; // Component
 
 #endif // MSG_GAME_COMPONENT_HPP

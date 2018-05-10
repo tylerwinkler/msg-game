@@ -19,6 +19,7 @@ public:
     static ComponentPtr createHealthComponent();
 
     static ComponentPtr createSpriteComponent();
+    static ComponentPtr createSpriteComponent(const std::string& texture);
 }; // ComponentFactory
 
 #endif // MSG_GAME_COMPONENTS_COMPONENTFACTORY_HPP

@@ -7,12 +7,9 @@ void Entity::addComponent(std::unique_ptr<Component> component)
 
 Component& Entity::getComponentByType(int type)
 {
-    for (auto& comp : m_components)
+    if (m_components.count(type) != 0)
     {
-        if (comp.second->type == type)
-        {
-            return *comp.second;
-        }
+        return *m_components.at(type);
     }
 
     throw std::logic_error("Component does not exist");

@@ -39,3 +39,10 @@ ComponentFactory::ComponentPtr ComponentFactory::createSpriteComponent()
 
     return std::move(component);
 }
+
+ComponentFactory::ComponentPtr ComponentFactory::createSpriteComponent(const std::string& texture)
+{
+    std::unique_ptr<Component> component(new SpriteComponent(texture));
+
+    return std::move(component);
+}

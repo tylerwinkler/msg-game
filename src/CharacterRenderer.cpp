@@ -1,16 +1,9 @@
 #include "CharacterRenderer.hpp"
 
-void CharacterRenderer::setCircle(int radius, sf::Color color)
+#include "Components/SpriteComponent.hpp"
+
+void CharacterRenderer::render(sf::RenderTarget& target, Entity& character)
 {
-    m_circle.setRadius(radius);
-    m_circle.setFillColor(color);
-
-    m_circle.setOrigin(radius, radius);
-}
-
-void CharacterRenderer::render(sf::RenderTarget& target, const Entity& character)
-{
-    m_circle.setPosition(character.position);
-
-    target.draw(m_circle);
+    character.getComponent<SpriteComponent>().setPosition(character.position);
+    character.getComponent<SpriteComponent>().render(target);
 }

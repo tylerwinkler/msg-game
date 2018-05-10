@@ -14,6 +14,7 @@ public:
 
 private:
     TextureManager* m_textureManager;
+
 }; // GameEngine
 
 #endif // MSG_GAME_GAMEENGINE_HPP

@@ -35,6 +35,8 @@
 #include "Components/SpriteComponent.hpp"
 #include "Components/ComponentFactory.hpp"
 
+#include "Systems/AnimationSystem.hpp"
+
 #include "Console.hpp"
 #include "IMouseEventListener.hpp"
 #include "Player.hpp"
@@ -68,14 +70,13 @@ int main(int argc, char* argv[])
     player.getCharacter() = EntityFactory::createCharacter(0);
     player.getCharacter().position = sf::Vector2f(150, 150);
 
-    float& health = ((HealthComponent&)player.getCharacter().getComponentByType(ComponentType::HealthComponent)).hp;
+    float& health = player.getCharacter().getComponent<HealthComponent>().hp;
     TileMapRenderer mapRenderer;
     mapRenderer.setTileAtlas(atlas);
 
     Tile* selectedTile = nullptr;
 
     CharacterRenderer characterRenderer;
-    characterRenderer.setCircle(10, sf::Color::Blue);
 
     enum Movement {UP, DOWN, LEFT, RIGHT};
     bool controls[] = {false, false, false, false};
@@ -88,7 +89,7 @@ int main(int argc, char* argv[])
 
     Entity trans = EntityFactory::createMapTransition(0);
     trans.position = sf::Vector2f(400, 400);
-    CollisionComponent& comp = dynamic_cast<CollisionComponent&>(trans.getComponentByType(ComponentType::CollisionComponent));
+    CollisionComponent& comp = trans.getComponent<CollisionComponent>();
 
     sf::RectangleShape rect;
     rect.setPosition(trans.position.x + comp.x, trans.position.y + comp.y);
@@ -139,7 +140,7 @@ int main(int argc, char* argv[])
     lightmap.create(map.getWidth() * 64, map.getHeight() * 64);
     sf::RectangleShape blackbox;
     blackbox.setSize(sf::Vector2f(map.getWidth() * 64, map.getHeight() * 64));
-    blackbox.setFillColor(sf::Color(10, 10, 10));
+    blackbox.setFillColor(sf::Color(100, 100, 100));
 
     bool lightControl = false;
 
@@ -158,6 +159,23 @@ int main(int argc, char* argv[])
     sound.setVolume(0.3f);
     sound.setLoop(true);
     sound.play();
+
+    AnimationSystem animationSystem;
+    Entity torch2 = EntityFactory::createTorch();
+    torch2.position = sf::Vector2f(500, 500);
+    torch2.getComponent<AnimationComponent>().playAnimation("lightOn");
+
+    player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkDown");
+
+    animationSystem.addComponent(&torch2.getComponent<AnimationComponent>());
+    animationSystem.addComponent(&player.getCharacter().getComponent<AnimationComponent>());
+
+    window.setKeyRepeatEnabled(false);
+
+    Entity character = EntityFactory::createCharacter(0);
+    character.position = sf::Vector2f(600, 600);
+    character.getComponent<AnimationComponent>().playAnimation("walkDown");
+    animationSystem.addComponent(&character.getComponent<AnimationComponent>());
 
     while (running)
     {
@@ -200,15 +218,37 @@ int main(int argc, char* argv[])
                 {
                 case sf::Keyboard::W:
                     controls[UP] = true;
+                    player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkUp");
                     break;
                 case sf::Keyboard::S:
                     controls[DOWN] = true;
+                    player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkDown");
                     break;
                 case sf::Keyboard::A:
                     controls[LEFT] = true;
+                    player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkLeft");
                     break;
                 case sf::Keyboard::D:
                     controls[RIGHT] = true;
+                    player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkRight");
+                    break;
+                case sf::Keyboard::G:
+                    {
+                        Entity swap = player.getCharacter();
+                        player.getCharacter() = character;
+                        character = swap;
+                    }
+                    break;
+                case sf::Keyboard::T:
+                    if (torchLit)
+                    {
+                        torch2.getComponent<AnimationComponent>().playAnimation("lightOff");
+                    }
+                    else
+                    {
+                        torch2.getComponent<AnimationComponent>().playAnimation("lightOn");
+                    }
+                    torchLit = !torchLit;
                     break;
                 case sf::Keyboard::Tilde:
                     console.toggle();
@@ -254,20 +294,22 @@ int main(int argc, char* argv[])
             }
         }
 
+        animationSystem.update(deltaClock.getElapsedTime().asSeconds());
+
         ImGui::SFML::Update(window, deltaClock.restart());
 
         sf::Vector2f velocity(0, 0);
         if (controls[UP])
         {
-            velocity.y -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 5;
+            velocity.y -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
         }
         if (controls[DOWN])
         {
-            velocity.y += action == "Swimming" ? 10 : action == "Burning" ? 2 : 5;
+            velocity.y += action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
         }
         if (controls[LEFT])
         {
-            velocity.x -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 5;
+            velocity.x -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
         }
         if (controls[RIGHT])
         {
@@ -424,10 +466,13 @@ int main(int argc, char* argv[])
         mapRenderer.render(window, map);
 
         characterRenderer.render(window, player.getCharacter());
+        characterRenderer.render(window, character);
 
         window.draw(rect);
 
         window.draw(torch);
+
+        torch2.getComponent<SpriteComponent>().render(window);
 
         lightmap.clear();
         lightmap.draw(blackbox);

@@ -13,7 +13,7 @@ TileMap::TileMap()
 
 Tile& TileMap::raytrace(int x, int y)
 {
-    return m_tiles[x / (128)][y / (128)];
+    return m_tiles[x / (32)][y / (32)];
 }
 
 Tile& TileMap::tileAt(int x, int y)

@@ -39,6 +39,22 @@
 					<Add option="-lsfml-system" />
 				</Linker>
 			</Target>
+			<Target title="Test">
+				<Option output="bin/Test/msg-game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Test/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lsfml-network-d" />
+					<Add option="-lsfml-audio-d" />
+					<Add option="-lsfml-graphics-d" />
+					<Add option="-lsfml-window-d" />
+					<Add option="-lsfml-system-d" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -55,6 +71,7 @@
 		<Unit filename="extlib/imgui-sfml/imgui-SFML.cpp" />
 		<Unit filename="extlib/imgui/imgui.cpp" />
 		<Unit filename="extlib/imgui/imgui_draw.cpp" />
+		<Unit filename="include/Animation.hpp" />
 		<Unit filename="include/CharacterRenderer.hpp" />
 		<Unit filename="include/ChunkRenderer.hpp" />
 		<Unit filename="include/Components/AnimationComponent.hpp" />
@@ -81,10 +98,12 @@
 		<Unit filename="include/Tilemap/TileMapSerializer.hpp" />
 		<Unit filename="include/Tilemap/TileRenderer.hpp" />
 		<Unit filename="include/Wallet.hpp" />
+		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/CharacterRenderer.cpp" />
 		<Unit filename="src/ChunkRenderer.cpp" />
 		<Unit filename="src/Components/AnimationComponent.cpp" />
 		<Unit filename="src/Components/CollisionComponent.cpp" />
+		<Unit filename="src/Components/Component.cpp" />
 		<Unit filename="src/Components/ComponentFactory.cpp" />
 		<Unit filename="src/Components/HealthComponent.cpp" />
 		<Unit filename="src/Components/SpriteComponent.cpp" />
@@ -94,7 +113,10 @@
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/Global.cpp" />
 		<Unit filename="src/Inventory.cpp" />
-		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/Main.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Systems/AnimationSystem.cpp" />
 		<Unit filename="src/TextureManager.cpp" />
@@ -104,6 +126,15 @@
 		<Unit filename="src/Tilemap/TileMapSerializer.cpp" />
 		<Unit filename="src/Tilemap/TileRenderer.cpp" />
 		<Unit filename="src/Wallet.cpp" />
+		<Unit filename="test/Test.cpp">
+			<Option target="Test" />
+		</Unit>
+		<Unit filename="test/Test.hpp">
+			<Option target="Test" />
+		</Unit>
+		<Unit filename="test/Test_AnimationSystem.cpp">
+			<Option target="Test" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -4,7 +4,7 @@
 
 namespace
 {
-    const int AtlasResolution = 128;
+    const int AtlasResolution = 32;
 }
 
 TileRenderer::TileRenderer()
