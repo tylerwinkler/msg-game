@@ -6,7 +6,7 @@
 class TilemapEditor : public IMouseEventListener
 {
 public:
-    void onMouseButton(int x, int y, sf::Mouse::Button button, bool pressed) final;
+    void onMouseButton(int x, int y, sf::Mouse::Button button, bool pressed) final override;
 };
 
 #endif // MSG_GAME_TILEMAP_TILEMAPEDITOR_HPP

@@ -6,7 +6,7 @@
 class IMouseEventListener
 {
 public:
-    virtual void onMouseButton(int x, int y, sf::Mouse::Button button, bool pressed);
+    virtual void onMouseButton(int x, int y, sf::Mouse::Button button, bool pressed){}
 }; // IMouseEventListener
 
 #endif // MSG_GAME_IMOUSEEVENTLISTENER_HPP

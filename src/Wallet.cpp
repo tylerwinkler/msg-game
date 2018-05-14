@@ -1,5 +1,9 @@
 #include "Wallet.hpp"
 
+Wallet::Wallet() : m_gold(0)
+{
+}
+
 int Wallet::getGold()
 {
     return m_gold;

@@ -4,6 +4,9 @@
 class Wallet
 {
 public:
+    Wallet();
+
+public:
     int getGold();
 
     void setGold(int gold);
