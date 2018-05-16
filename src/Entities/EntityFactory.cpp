@@ -2,9 +2,13 @@
 
 #include "Animation.hpp"
 
+#include "Components/AnimationComponent.hpp"
 #include "Components/CollisionComponent.hpp"
 #include "Components/ComponentFactory.hpp"
-#include "Components/AnimationComponent.hpp"
+#include "Components/InteractionComponent.hpp"
+#include "Components/LootComponent.hpp"
+
+#include <iostream>
 
 Entity EntityFactory::createMapTransition(int transitionId)
 {
@@ -82,6 +86,26 @@ Entity EntityFactory::createTorch()
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Torch Entity");
+    }
+
+    return entity;
+}
+
+Entity EntityFactory::createChest()
+{
+    Entity entity;
+
+    entity.addComponent(ComponentFactory::createSpriteComponent("./assets/images/chest.png"));
+    entity.addComponent(ComponentFactory::createLootComponent());
+    entity.addComponent(ComponentFactory::createInteractionComponent());
+    entity.addComponent(ComponentFactory::createCollisionComponent());
+
+    entity.getComponent<LootComponent>().getItems().push_back(1);
+    entity.getComponent<LootComponent>().getItems().push_back(1);
+
+    if (!entity.init())
+    {
+        throw std::logic_error("Failed to init Chest Entity");
     }
 
     return entity;

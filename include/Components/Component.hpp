@@ -11,6 +11,8 @@ namespace ComponentType
         CollisionComponent,
         HealthComponent,
         SpriteComponent,
+        LootComponent,
+        InteractionComponent,
     };
 };
 

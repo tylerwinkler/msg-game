@@ -1,5 +1,7 @@
 #include "TestGameState.hpp"
 
+#include "Components/LootComponent.hpp"
+
 namespace {bool controls[] = {false, false, false, false};}
 
 bool TestGameState::init()
@@ -79,66 +81,92 @@ bool TestGameState::init()
     character.getComponent<AnimationComponent>().playAnimation("walkDown");
     animationSystem.addComponent(&character.getComponent<AnimationComponent>());
 
+    chest = EntityFactory::createChest();
+    chest.position = sf::Vector2f(40, 200);
+    chest.getComponent<SpriteComponent>().getSprite().setPosition(sf::Vector2f(40, 200));
+
+    m_interact = false;
+    m_sprint = false;
+
     return true;
 }
 
-void TestGameState::handleEvent(sf::Event event)
+void TestGameState::onResize(int width, int height)
 {
-    switch (event.type)
+    camera.setSize(width, height);
+}
+
+void TestGameState::onMouseButton(int x, int y, int button, bool pressed)
+{
+    if (pressed)
     {
-    case sf::Event::Closed:
-        Global::game.quit();
-        break;
-    case sf::Event::Resized:
-        camera.setSize(event.size.width, event.size.height);
-        break;
-    case sf::Event::MouseButtonPressed:
         if (ImGui::IsAnyItemHovered() || ImGui::IsAnyItemActive())
         {
-            break;
+            return;
         }
+    }
 //                selectedTile = &map.raytrace(
 //                                             window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y), camera).x,
 //                                              window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y), camera).y);
-        for (auto listener : mouseListeners)
-        {
-            listener->onMouseButton(event.mouseButton.x, event.mouseButton.y, event.mouseButton.button, true);
-        }
-        break;
-    case sf::Event::KeyPressed:
+    for (auto listener : mouseListeners)
+    {
+        listener->onMouseButton(x, y, sf::Mouse::Button(button), pressed);
+    }
+}
+
+void TestGameState::onMouseWheelMoved(float delta)
+{
+    if (delta > 0)
+    {
+        camera.zoom(0.9f);
+    }
+    else
+    {
+        camera.zoom(1.1f);
+    }
+}
+
+void TestGameState::onKey(int keyCode, bool control, bool alt, bool shift, bool system, bool pressed)
+{
+    if (pressed)
+    {
         if (console.isOpen())
         {
-            if (event.key.code == sf::Keyboard::Tilde)
+            if (keyCode == sf::Keyboard::Tilde)
             {
                 console.toggle();
             }
         }
-        switch (event.key.code)
+    }
+
+    m_sprint = shift;
+    switch (keyCode)
+    {
+    case sf::Keyboard::W:
+        controls[UP] = pressed;
+        break;
+    case sf::Keyboard::S:
+        controls[DOWN] = pressed;
+        break;
+    case sf::Keyboard::A:
+        controls[LEFT] = pressed;
+        break;
+    case sf::Keyboard::D:
+        controls[RIGHT] = pressed;
+        break;
+    case sf::Keyboard::E:
+        m_interact = pressed;
+        break;
+    case sf::Keyboard::G:
         {
-        case sf::Keyboard::W:
-            controls[UP] = true;
-            player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkUp");
-            break;
-        case sf::Keyboard::S:
-            controls[DOWN] = true;
-            player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkDown");
-            break;
-        case sf::Keyboard::A:
-            controls[LEFT] = true;
-            player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkLeft");
-            break;
-        case sf::Keyboard::D:
-            controls[RIGHT] = true;
-            player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkRight");
-            break;
-        case sf::Keyboard::G:
-            {
-//                        Entity swap = player.getCharacter();
-//                        player.getCharacter() = character;
-//                        character = swap;
-            }
-            break;
-        case sf::Keyboard::T:
+    //                        Entity swap = player.getCharacter();
+    //                        player.getCharacter() = character;
+    //                        character = swap;
+        }
+        break;
+    case sf::Keyboard::T:
+        if (pressed)
+        {
             if (torchLit)
             {
                 torch2.getComponent<AnimationComponent>().playAnimation("lightOff");
@@ -148,44 +176,18 @@ void TestGameState::handleEvent(sf::Event event)
                 torch2.getComponent<AnimationComponent>().playAnimation("lightOn");
             }
             torchLit = !torchLit;
-            break;
-        case sf::Keyboard::Tilde:
+        }
+        break;
+    case sf::Keyboard::Tilde:
+        if (pressed)
+        {
             console.toggle();
-            break;
-        case sf::Keyboard::F1:
+        }
+        break;
+    case sf::Keyboard::F1:
+        if (pressed)
+        {
             lightControl = !lightControl;
-            break;
-        default:
-            break;
-        }
-        break;
-    case sf::Event::KeyReleased:
-        switch (event.key.code)
-        {
-        case sf::Keyboard::W:
-            controls[UP] = false;
-            break;
-        case sf::Keyboard::S:
-            controls[DOWN] = false;
-            break;
-        case sf::Keyboard::A:
-            controls[LEFT] = false;
-            break;
-        case sf::Keyboard::D:
-            controls[RIGHT] = false;
-            break;
-        default:
-            break;
-        }
-        break;
-    case sf::Event::MouseWheelMoved:
-        if (event.mouseWheel.delta > 0)
-        {
-            camera.zoom(0.9f);
-        }
-        else
-        {
-            camera.zoom(1.1f);
         }
         break;
     default:
@@ -195,24 +197,29 @@ void TestGameState::handleEvent(sf::Event event)
 
 void TestGameState::update()
 {
-    animationSystem.update(deltaClock.getElapsedTime().asSeconds());
+    animationSystem.update(deltaClock.restart().asSeconds());
 
     sf::Vector2f velocity(0, 0);
+    player.getCharacter().getComponent<AnimationComponent>().pauseAnimation();
     if (controls[UP])
     {
         velocity.y -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkUp");
     }
     if (controls[DOWN])
     {
         velocity.y += action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkDown");
     }
     if (controls[LEFT])
     {
         velocity.x -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkLeft");
     }
     if (controls[RIGHT])
     {
         velocity.x += action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkRight");
     }
 
     if (velocity.x != 0 && velocity.y != 0)
@@ -221,6 +228,12 @@ void TestGameState::update()
         velocity.x = hypotenuse * velocity.x;
         velocity.y = hypotenuse * velocity.y;
     }//
+
+    if (m_sprint)
+    {
+        velocity.x *= 1.5;
+        velocity.y *= 1.5;
+    }
 
     sf::Vector2f destination = player.getCharacter().position + velocity;
 
@@ -257,6 +270,26 @@ void TestGameState::update()
         action = "Idle";
     }
 
+    if (m_interact)
+    {
+        sf::FloatRect interact;
+        interact.width = 16;
+        interact.height = 16;
+        interact.left = player.getCharacter().position.x - 24;
+        interact.top = player.getCharacter().position.y;
+
+        if (interact.intersects(chest.getComponent<SpriteComponent>().getSprite().getGlobalBounds()))
+        {
+            if (!chest.getComponent<LootComponent>().getItems().empty())
+            {
+                chest.getComponent<LootComponent>().getItems().pop_back();
+                player.getInventory().addItem("Dagger from chest");
+            }
+        }
+    }
+
+    m_interact = false;
+
     sf::Listener::setPosition(player.getCharacter().position.x, 0, player.getCharacter().position.y);
 
     camera.setCenter(player.getCharacter().position);
@@ -283,6 +316,59 @@ void TestGameState::update()
         }
 
     }
+}
+
+void TestGameState::render()
+{
+    sf::RenderWindow& window = Global::game.getWindow();
+    window.setView(camera);
+
+    mapRenderer.render(window, map);
+
+    characterRenderer.render(window, player.getCharacter());
+    characterRenderer.render(window, character);
+
+    window.draw(rect);
+
+    window.draw(torch);
+
+    torch2.getComponent<SpriteComponent>().render(window);
+    chest.getComponent<SpriteComponent>().render(window);
+
+    lightmap.clear();
+    lightmap.draw(blackbox);
+    if (torchLit)
+    {
+        if (lightControl)
+        {
+            light.setPosition(player.getCharacter().position);
+            lightmap.draw(light);
+        }
+        else
+        lightmap.draw(light, sf::BlendAdd);
+    }
+    lightmap.display();
+    lightmapSprite.setTexture(lightmap.getTexture());
+
+    window.draw(lightmapSprite, sf::BlendMultiply);
+}
+
+void TestGameState::cleanup()
+{
+
+}
+
+
+void TestGameState::imguiUpdate()
+{
+    ImGui::Begin("Frame Time");
+    std::stringstream ss2;
+    float time = frameTime.restart().asSeconds();
+    ss2 << "FrameTime: " << time;
+    ss2 << "\nFPS: " << 1.0f / time;
+    ss2 << "\nTotal Runtime: " << torchClock.getElapsedTime().asSeconds();
+    ImGui::Text(ss2.str().c_str());
+    ImGui::End();
 
     // Player stats
     ImGui::Begin("");
@@ -310,7 +396,7 @@ void TestGameState::update()
         if (player.getWallet().hasGold(500))
         {
             player.getWallet().removeGold(500);
-            player.getInventory().addItem("Dagger");
+            player.getInventory().addItem("Dagger from shop");
         }
     }
     ImGui::End();
@@ -358,52 +444,4 @@ void TestGameState::update()
     {
         console.draw();
     }
-}
-
-void TestGameState::render()
-{
-    sf::RenderWindow& window = Global::game.getWindow();
-    window.setView(camera);
-
-    mapRenderer.render(window, map);
-
-    characterRenderer.render(window, player.getCharacter());
-    characterRenderer.render(window, character);
-
-    window.draw(rect);
-
-    window.draw(torch);
-
-    torch2.getComponent<SpriteComponent>().render(window);
-
-    lightmap.clear();
-    lightmap.draw(blackbox);
-    if (torchLit)
-    {
-        if (lightControl)
-        {
-            light.setPosition(player.getCharacter().position);
-            lightmap.draw(light);
-        }
-        else
-        lightmap.draw(light, sf::BlendAdd);
-    }
-    lightmap.display();
-    lightmapSprite.setTexture(lightmap.getTexture());
-
-    window.draw(lightmapSprite, sf::BlendMultiply);
-
-    ImGui::Begin("Frame Time");
-    std::stringstream ss2;
-    float time = frameTime.restart().asSeconds();
-    ss2 << "FrameTime: " << time;
-    ss2 << "\nFPS: " << 1.0f / time;
-    ss2 << "\nTotal Runtime: " << torchClock.getElapsedTime().asSeconds();
-    ImGui::Text(ss2.str().c_str());
-    ImGui::End();
-}
-
-void TestGameState::cleanup()
-{
-
 }

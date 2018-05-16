@@ -43,13 +43,21 @@ class TestGameState : public State
 public:
     bool init() final override;
 
-    void handleEvent(sf::Event event) final override;
+    void onResize(int width, int height) final override;
+
+    void onMouseButton(int x, int y, int button, bool pressed) final override;
+
+    void onMouseWheelMoved(float delta) final override;
+
+    void onKey(int keyCode, bool control, bool alt, bool shift, bool system, bool pressed) final override;
 
     void update() final override;
 
     void render() final override;
 
     void cleanup() final override;
+
+    void imguiUpdate() final override;
 
 public:
     sf::View camera;
@@ -70,6 +78,7 @@ public:
     sf::Sprite torch;
     Entity trans;
     Entity character;
+    Entity chest;
     sf::Clock frameTime;
     sf::Clock torchClock;
     float seconds = -3.f;
@@ -84,6 +93,8 @@ public:
     TilemapEditor editor;
     sf::SoundBuffer buffer;
     sf::Sound sound;
+    bool m_interact;
+    bool m_sprint;
 }; // TestGameState
 
 #endif // MSG_GAME_TEST_TESTGAMESTATE_HPP

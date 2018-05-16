@@ -18,6 +18,10 @@ public:
 
     static ComponentPtr createHealthComponent();
 
+    static ComponentPtr createInteractionComponent();
+
+    static ComponentPtr createLootComponent();
+
     static ComponentPtr createSpriteComponent();
     static ComponentPtr createSpriteComponent(const std::string& texture);
 }; // ComponentFactory

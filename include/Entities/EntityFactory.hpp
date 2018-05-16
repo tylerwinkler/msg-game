@@ -11,6 +11,8 @@ public:
     static Entity createCharacter(int characterId);
 
     static Entity createTorch();
+
+    static Entity createChest();
 }; // EntityFactory
 
 #endif // MSG_GAME_ENTITIES_ENTITYFACTORY_HPP

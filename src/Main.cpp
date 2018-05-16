@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[])
 {
-    Global::game.run(new MainMenuState);
+    Global::game.run(new MainMenuState, 25);
 
     return 0;
 }

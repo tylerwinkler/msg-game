@@ -79,10 +79,13 @@
 		<Unit filename="include/Components/Component.hpp" />
 		<Unit filename="include/Components/ComponentFactory.hpp" />
 		<Unit filename="include/Components/HealthComponent.hpp" />
+		<Unit filename="include/Components/InteractionComponent.hpp" />
+		<Unit filename="include/Components/LootComponent.hpp" />
 		<Unit filename="include/Components/SpriteComponent.hpp" />
 		<Unit filename="include/Console.hpp" />
 		<Unit filename="include/Entities/Entity.hpp" />
 		<Unit filename="include/Entities/EntityFactory.hpp" />
+		<Unit filename="include/FontManager.hpp" />
 		<Unit filename="include/GameEngine.hpp" />
 		<Unit filename="include/Global.hpp" />
 		<Unit filename="include/IMouseEventListener.hpp" />
@@ -90,6 +93,9 @@
 		<Unit filename="include/Inventory.hpp" />
 		<Unit filename="include/Player.hpp" />
 		<Unit filename="include/SFMLRenderer.hpp" />
+		<Unit filename="include/State.hpp" />
+		<Unit filename="include/StateMachine.hpp" />
+		<Unit filename="include/States/MainMenuState.hpp" />
 		<Unit filename="include/Systems/AnimationSystem.hpp" />
 		<Unit filename="include/TextureManager.hpp" />
 		<Unit filename="include/TilemapEditor.hpp" />
@@ -106,10 +112,13 @@
 		<Unit filename="src/Components/Component.cpp" />
 		<Unit filename="src/Components/ComponentFactory.cpp" />
 		<Unit filename="src/Components/HealthComponent.cpp" />
+		<Unit filename="src/Components/InteractionComponent.cpp" />
+		<Unit filename="src/Components/LootComponent.cpp" />
 		<Unit filename="src/Components/SpriteComponent.cpp" />
 		<Unit filename="src/Console.cpp" />
 		<Unit filename="src/Entities/Entity.cpp" />
 		<Unit filename="src/Entities/EntityFactory.cpp" />
+		<Unit filename="src/FontManager.cpp" />
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/Global.cpp" />
 		<Unit filename="src/Inventory.cpp" />
@@ -118,6 +127,8 @@
 			<Option target="Release" />
 		</Unit>
 		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/StateMachine.cpp" />
+		<Unit filename="src/States/MainMenuState.cpp" />
 		<Unit filename="src/Systems/AnimationSystem.cpp" />
 		<Unit filename="src/TextureManager.cpp" />
 		<Unit filename="src/TilemapEditor.cpp" />
@@ -130,6 +141,12 @@
 			<Option target="Test" />
 		</Unit>
 		<Unit filename="test/Test.hpp">
+			<Option target="Test" />
+		</Unit>
+		<Unit filename="test/TestGameState.cpp">
+			<Option target="Test" />
+		</Unit>
+		<Unit filename="test/TestGameState.hpp">
 			<Option target="Test" />
 		</Unit>
 		<Unit filename="test/Test_AnimationSystem.cpp">

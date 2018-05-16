@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics/RenderWindow.hpp"
 
+class FontManager;
 class State;
 class StateMachine;
 class TextureManager;
@@ -14,9 +15,11 @@ public:
     ~GameEngine();
 
 public:
-    void run(State* initialState);
+    void run(State* initialState, int ups = 25);
 
     void quit();
+
+    FontManager& getFontManager();
 
     StateMachine& getStateMachine();
 
@@ -26,6 +29,8 @@ public:
 
 private:
     bool m_running;
+
+    FontManager* m_fontManager;
 
     sf::RenderWindow m_window;
 
