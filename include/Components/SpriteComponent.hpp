@@ -15,7 +15,7 @@ public:
     SpriteComponent(const std::string& texture);
 
 public:
-    bool init(Entity& owner);
+    bool onInit(Entity* owner) final override;
 
     void setPosition(sf::Vector2f position);
 
@@ -24,6 +24,8 @@ public:
     sf::Sprite& getSprite();
 
     void render(sf::RenderTarget& target);
+
+    void receive(int x, int y) final override;
 
 private:
     sf::Sprite m_sprite;

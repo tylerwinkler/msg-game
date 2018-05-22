@@ -3,6 +3,8 @@
 
 #include <functional>
 
+#include "SFML/Graphics/Rect.hpp"
+
 #include "Components/Component.hpp"
 
 class CollisionComponent : public Component
@@ -12,18 +14,19 @@ public:
     CollisionComponent(int x, int y, int width, int height);
 
 public:
-    int x;
-    int y;
-    int width;
-    int height;
+    sf::IntRect rect;
 
 public:
-    void setCollisionFunc(std::function<void()> func);
+    bool onInit(Entity* owner);
 
-    void onCollision();
+    void setCollisionFunc(std::function<void(Entity&)> func);
+
+    void onCollision(Entity& other);
+
+    void receive(int x, int y);
 
 private:
-    std::function<void()> m_collisionFunc;
+    std::function<void(Entity&)> m_collisionFunc;
 }; // CollisionComponent
 
 #endif // MSG_GAME_COMPONENTS_COLLISIONCOMPONENT_HPP

@@ -1,26 +1,44 @@
 #include "States/MainMenuState.hpp"
 
+#include "SFML/Graphics/RenderWindow.hpp"
+
+#include "States/LoadGameState.hpp"
+#include "States/NewGameState.hpp"
+#include "States/OptionsState.hpp"
+
 #include "FontManager.hpp"
 #include "GameEngine.hpp"
 #include "Global.hpp"
 #include "StateMachine.hpp"
+#include "TextureManager.hpp"
 
 bool MainMenuState::init()
 {
-    m_text.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
-    m_text1.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
-    m_text2.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
-    m_text3.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
+    m_background.setTexture(Global::game.getTextureManager().get("./assets/images/background.jpg"));
 
-    m_text.setString("MAIN MENU");
-    m_text1.setString("New Game");
-    m_text2.setString("Load Game");
-    m_text3.setString("Fuck Off");
+    m_menuHeader.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
+    m_newGameText.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
+    m_loadGameText.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
+    m_optionsText.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
+    m_exitText.setFont(Global::game.getFontManager().get("assets/fonts/font.ttf"));
 
-    m_text.setPosition(sf::Vector2f(100, 100));
-    m_text1.setPosition(sf::Vector2f(120, 140));
-    m_text2.setPosition(sf::Vector2f(140, 180));
-    m_text3.setPosition(sf::Vector2f(160, 220));
+    m_menuHeader.setString("MAIN MENU");
+    m_newGameText.setString("New Game");
+    m_loadGameText.setString("Load Game");
+    m_optionsText.setString("Options");
+    m_exitText.setString("Quit Game");
+
+    m_menuHeader.setPosition(sf::Vector2f(100, 100));
+    m_newGameText.setPosition(sf::Vector2f(120, 140));
+    m_loadGameText.setPosition(sf::Vector2f(140, 180));
+    m_optionsText.setPosition(sf::Vector2f(160, 220));
+    m_exitText.setPosition(sf::Vector2f(180, 260));
+
+    m_menuHeader.setColor(sf::Color::Black);
+    m_newGameText.setColor(sf::Color::Black);
+    m_loadGameText.setColor(sf::Color::Black);
+    m_optionsText.setColor(sf::Color::Black);
+    m_exitText.setColor(sf::Color::Black);
 
     return true;
 }
@@ -29,15 +47,19 @@ void MainMenuState::onMouseButton(int x, int y, int button, bool pressed)
 {
     if (pressed)
     {
-        if (m_text1.getGlobalBounds().contains(x, y))
+        if (m_newGameText.getGlobalBounds().contains(x, y))
         {
-            //Global::game.getStateMachine().changeState(new PlayGameState);
+            Global::game.getStateMachine().changeState(new NewGameState);
         }
-        if (m_text2.getGlobalBounds().contains(x, y))
+        if (m_loadGameText.getGlobalBounds().contains(x, y))
         {
-            //Global::game.getStateMachine().changeState(new PlayGameState);
+            Global::game.getStateMachine().changeState(new LoadGameState);
         }
-        if (m_text3.getGlobalBounds().contains(x, y))
+        if (m_optionsText.getGlobalBounds().contains(x, y))
+        {
+            Global::game.getStateMachine().changeState(new OptionsState);
+        }
+        if (m_exitText.getGlobalBounds().contains(x, y))
         {
             Global::game.quit();
         }
@@ -56,8 +78,10 @@ void MainMenuState::update()
 
 void MainMenuState::render()
 {
-    Global::game.getWindow().draw(m_text);
-    Global::game.getWindow().draw(m_text1);
-    Global::game.getWindow().draw(m_text2);
-    Global::game.getWindow().draw(m_text3);
+    Global::game.getWindow().draw(m_background);
+    Global::game.getWindow().draw(m_menuHeader);
+    Global::game.getWindow().draw(m_newGameText);
+    Global::game.getWindow().draw(m_loadGameText);
+    Global::game.getWindow().draw(m_optionsText);
+    Global::game.getWindow().draw(m_exitText);
 }

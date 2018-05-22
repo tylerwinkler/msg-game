@@ -1,17 +1,56 @@
 #include "TestGameState.hpp"
 
+#include "SFML/Graphics/RenderWindow.hpp"
+
 #include "Components/LootComponent.hpp"
 
-namespace {bool controls[] = {false, false, false, false};}
+#include "Systems/CollisionSystem.hpp"
+
+#include "TmxRenderer.hpp"
+
+#include <iostream>
+
+#include "Systems/EntitySystem.hpp"
+
+namespace {
+    bool controls[] = {false, false, false, false};
+    sf::Sprite spr;
+    std::vector<Entity> ents;
+    EntitySystem es;
+}
+
+void renderCollider(CollisionComponent& comp, sf::RenderTarget& target)
+{
+    sf::RectangleShape rect;
+    rect.setPosition(comp.rect.left, comp.rect.top);
+    rect.setSize(sf::Vector2f(comp.rect.width, comp.rect.height));
+    rect.setFillColor(sf::Color(200, 150, 100, 150));
+    rect.setOutlineThickness(-2.f);
+    rect.setOutlineColor(sf::Color(200, 15, 100, 250));
+
+    target.draw(rect);
+}
 
 bool TestGameState::init()
 {
+    map2 = TmxLoader::loadFromFile("./assets/maps/untitled.tmx");
+
+    for (int i = 0; i < map2.objects.size(); ++i)
+    {
+        TmxMapEntity& ent = map2.objects[i];
+        ents.push_back(EntityFactory::create(ent.type));
+        ents.back().setPosition(ent.x, ent.y);
+    }
+
     console.close();
+
+    spr.setTexture(Global::game.getTextureManager().get("./assets/images/71b.png"));
+    spr.setPosition(1600, 1400);
 
     map = serializer.deserialize("./assets/maps/edana.txt");
 
     player.getCharacter() = EntityFactory::createCharacter(0);
-    player.getCharacter().position = sf::Vector2f(150, 150);
+    player.getCharacter().position = sf::Vector2f(1500, 1500);
 
     mapRenderer.setTileAtlas(Global::game.getTextureManager().get("./assets/images/atlas.jpg"));
 
@@ -19,19 +58,12 @@ bool TestGameState::init()
     camera.setSize(Global::game.getWindow().getView().getSize());
 
     trans = EntityFactory::createMapTransition(0);
-    trans.position = sf::Vector2f(400, 400);
+    trans.setPosition(400, 400);
 
-    rect.setPosition(trans.position.x + trans.getComponent<CollisionComponent>().x, trans.position.y + trans.getComponent<CollisionComponent>().y);
-    rect.setSize(sf::Vector2f(trans.getComponent<CollisionComponent>().width, trans.getComponent<CollisionComponent>().height));
-    rect.setFillColor(sf::Color(200, 0, 0, 150));
-    rect.setOutlineColor(sf::Color(200, 0, 0, 250));
-    rect.setOutlineThickness(5.f);
-
-    trans.getComponent<CollisionComponent>().setCollisionFunc([&]{
-                            map = serializer.deserialize("./assets/maps/map.txt");
-                            trans.position = sf::Vector2f(0, 0);
-                            rect.setPosition(trans.position.x + trans.getComponent<CollisionComponent>().x, trans.position.y + trans.getComponent<CollisionComponent>().y);
-                          });
+    std::function<void(Entity&)> cf = [](Entity& other){
+                                                              other.setPosition(1500, 1500);
+                          };
+    trans.getComponent<CollisionComponent>().setCollisionFunc(cf);
 
     console.setFunction("exit", [&]{Global::game.quit();});
     console.setFunction("rosebud", [&]{player.getWallet().addGold(1000);});
@@ -71,15 +103,23 @@ bool TestGameState::init()
 
     player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkDown");
 
-    animationSystem.addComponent(&torch2.getComponent<AnimationComponent>());
-    animationSystem.addComponent(&player.getCharacter().getComponent<AnimationComponent>());
+    Global::game.getAnimationSystem().addComponent(&torch2.getComponent<AnimationComponent>());
+    Global::game.getAnimationSystem().addComponent(&player.getCharacter().getComponent<AnimationComponent>());
 
     Global::game.getWindow().setKeyRepeatEnabled(false);
 
     character = EntityFactory::createCharacter(0);
     character.position = sf::Vector2f(600, 600);
     character.getComponent<AnimationComponent>().playAnimation("walkDown");
-    animationSystem.addComponent(&character.getComponent<AnimationComponent>());
+    Global::game.getAnimationSystem().addComponent(&character.getComponent<AnimationComponent>());
+
+    Global::game.getCollisionSystem().addComponent(&player.getCharacter().getComponent<CollisionComponent>());
+    Global::game.getCollisionSystem().addComponent(&trans.getComponent<CollisionComponent>());
+
+    for (int i = 0; i < ents.size(); ++i)
+    {
+        //ents[i].getComponent<AnimationComponent>().playAnimation("lightOn");
+    }
 
     chest = EntityFactory::createChest();
     chest.position = sf::Vector2f(40, 200);
@@ -87,6 +127,8 @@ bool TestGameState::init()
 
     m_interact = false;
     m_sprint = false;
+
+    trans.getComponent<CollisionComponent>().getOwner().setPosition(600, 200);
 
     return true;
 }
@@ -197,28 +239,28 @@ void TestGameState::onKey(int keyCode, bool control, bool alt, bool shift, bool 
 
 void TestGameState::update()
 {
-    animationSystem.update(deltaClock.restart().asSeconds());
+    Global::game.getAnimationSystem().update(deltaClock.restart().asSeconds());
 
     sf::Vector2f velocity(0, 0);
     player.getCharacter().getComponent<AnimationComponent>().pauseAnimation();
     if (controls[UP])
     {
-        velocity.y -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        velocity.y -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 15;
         player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkUp");
     }
     if (controls[DOWN])
     {
-        velocity.y += action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        velocity.y += action == "Swimming" ? 10 : action == "Burning" ? 2 : 15;
         player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkDown");
     }
     if (controls[LEFT])
     {
-        velocity.x -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        velocity.x -= action == "Swimming" ? 10 : action == "Burning" ? 2 : 15;
         player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkLeft");
     }
     if (controls[RIGHT])
     {
-        velocity.x += action == "Swimming" ? 10 : action == "Burning" ? 2 : 3;
+        velocity.x += action == "Swimming" ? 10 : action == "Burning" ? 2 : 15;
         player.getCharacter().getComponent<AnimationComponent>().playAnimation("walkRight");
     }
 
@@ -248,7 +290,7 @@ void TestGameState::update()
         }
         else
         {
-            velocity = sf::Vector2f(0, 0);
+            //velocity = sf::Vector2f(0, 0);
         }
         break;
     case Tile::LAVA:
@@ -262,7 +304,10 @@ void TestGameState::update()
 
     if (player.getCharacter().getComponent<HealthComponent>().hp > 0.0)
     {
-        player.getCharacter().position += velocity;
+        sf::Vector2f finalDestination = player.getCharacter().position;
+        finalDestination += velocity;
+
+        player.getCharacter().setPosition(finalDestination.x, finalDestination.y);
     }
 
     if (velocity == sf::Vector2f(0, 0))
@@ -280,11 +325,12 @@ void TestGameState::update()
 
         if (interact.intersects(chest.getComponent<SpriteComponent>().getSprite().getGlobalBounds()))
         {
-            if (!chest.getComponent<LootComponent>().getItems().empty())
-            {
-                chest.getComponent<LootComponent>().getItems().pop_back();
-                player.getInventory().addItem("Dagger from chest");
-            }
+            lootWin.open(chest.getComponent<LootComponent>());
+//            if (!chest.getComponent<LootComponent>().getItems().empty())
+//            {
+//                chest.getComponent<LootComponent>().getItems().pop_back();
+//                player.getInventory().addItem("Dagger from chest");
+//            }
         }
     }
 
@@ -294,10 +340,7 @@ void TestGameState::update()
 
     camera.setCenter(player.getCharacter().position);
 
-    if (rect.getGlobalBounds().contains(player.getCharacter().position))
-    {
-        trans.getComponent<CollisionComponent>().onCollision();
-    }
+    Global::game.getCollisionSystem().update();
 
     if (torch.getGlobalBounds().contains(player.getCharacter().position))
     {
@@ -323,12 +366,17 @@ void TestGameState::render()
     sf::RenderWindow& window = Global::game.getWindow();
     window.setView(camera);
 
-    mapRenderer.render(window, map);
+    //mapRenderer.render(window, map);
+    TmxRenderer renderer;
+    renderer.render(window, map2);
+
+    window.draw(spr);
 
     characterRenderer.render(window, player.getCharacter());
     characterRenderer.render(window, character);
 
-    window.draw(rect);
+    renderCollider(trans.getComponent<CollisionComponent>(), window);
+    renderCollider(player.getCharacter().getComponent<CollisionComponent>(), window);
 
     window.draw(torch);
 
@@ -351,6 +399,15 @@ void TestGameState::render()
     lightmapSprite.setTexture(lightmap.getTexture());
 
     window.draw(lightmapSprite, sf::BlendMultiply);
+
+    for (int i = 0; i < ents.size(); ++i)
+    {
+        if (ents[i].hasComponent(SpriteComponent()))
+        window.draw(ents[i].getComponent<SpriteComponent>().getSprite());
+    }
+
+    window.setView(window.getDefaultView());
+    lootWin.render(window);
 }
 
 void TestGameState::cleanup()

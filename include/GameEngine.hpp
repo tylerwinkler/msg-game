@@ -1,8 +1,10 @@
 #ifndef MSG_GAME_GAMEENGINE_HPP
 #define MSG_GAME_GAMEENGINE_HPP
 
-#include "SFML/Graphics/RenderWindow.hpp"
+namespace sf { class RenderWindow; }
 
+class AnimationSystem;
+class CollisionSystem;
 class FontManager;
 class State;
 class StateMachine;
@@ -27,14 +29,22 @@ public:
 
     sf::RenderWindow& getWindow();
 
+    AnimationSystem& getAnimationSystem();
+
+    CollisionSystem& getCollisionSystem();
+
 private:
     bool m_running;
 
-    FontManager* m_fontManager;
-
-    sf::RenderWindow m_window;
+    sf::RenderWindow* m_window;
 
     StateMachine* m_stateMachine;
+
+    AnimationSystem* m_animationSystem;
+
+    CollisionSystem* m_collisionSystem;
+
+    FontManager* m_fontManager;
 
     TextureManager* m_textureManager;
 }; // GameEngine

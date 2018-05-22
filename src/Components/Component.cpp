@@ -1,13 +1,20 @@
 #include "Components/Component.hpp"
 
-bool Component::init(Entity& owner)
+#include <stdexcept>
+
+bool Component::init(Entity* owner)
 {
-    m_owner = &owner;
+    m_owner = owner;
 
     return onInit(owner);
 }
 
-Entity* const Component::getOwner()
+Entity& Component::getOwner()
 {
-    return m_owner;
+    if (m_owner == nullptr)
+    {
+        throw std::runtime_error("WHAT THE FUCK!");
+    }
+
+    return *m_owner;
 }

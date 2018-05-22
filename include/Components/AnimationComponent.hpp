@@ -16,7 +16,7 @@ public:
     AnimationComponent();
 
 public:
-    bool onInit(Entity& owner) final override;
+    bool onInit(Entity* owner) final override;
 
     void addAnimation(const std::string& name, Animation animation);
 

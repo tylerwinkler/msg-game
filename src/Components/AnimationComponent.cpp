@@ -9,11 +9,11 @@ AnimationComponent::AnimationComponent()
     m_currentAnimation = nullptr;
 }
 
-bool AnimationComponent::onInit(Entity& owner)
+bool AnimationComponent::onInit(Entity* owner)
 {
     try
     {
-        m_spriteComponent = &owner.getComponent<SpriteComponent>();
+        m_spriteComponent = &owner->getComponent<SpriteComponent>();
     } catch (...)
     {
         throw std::logic_error("Component missing. failed to init");

@@ -19,18 +19,23 @@ namespace ComponentType
 class Component
 {
 public:
+    Component(){m_owner = nullptr;}
+
+public:
     int type;
 
-    bool init(Entity& owner);
+    bool init(Entity* owner);
+
+    virtual void receive(int x, int y){}
 
 private:
-    virtual bool onInit(Entity& owner){return true;}
+    virtual bool onInit(Entity* owner){return true;}
 
-protected:
-    Entity* const getOwner();
+public:
+    int getOwnerID();
 
 private:
-    Entity* m_owner;
+    int m_owner;
 }; // Component
 
 #endif // MSG_GAME_COMPONENT_HPP

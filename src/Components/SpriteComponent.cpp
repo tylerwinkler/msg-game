@@ -1,5 +1,7 @@
 #include "Components/SpriteComponent.hpp"
 
+#include <iostream>
+
 #include "SFML/Graphics/RenderTarget.hpp"
 
 #include "Entities/Entity.hpp"
@@ -18,8 +20,10 @@ SpriteComponent::SpriteComponent(const std::string& texture) : SpriteComponent()
     m_sprite.setTexture(Global::game.getTextureManager().get(texture));
 }
 
-bool SpriteComponent::init(Entity& owner)
+bool SpriteComponent::onInit(Entity* owner)
 {
+    owner->addObserver(this);
+    std::cout << "SpriteComponent Listening\n";
     return true;
 }
 
@@ -41,4 +45,10 @@ sf::Sprite& SpriteComponent::getSprite()
 void SpriteComponent::render(sf::RenderTarget& target)
 {
     target.draw(m_sprite);
+}
+
+void SpriteComponent::receive(int x, int y)
+{
+    std::cout << "Received\n";
+    m_sprite.setPosition(x, y);
 }

@@ -9,10 +9,10 @@ void AnimationSystem::update(float time)
     int i = 0;
     for (auto animation : m_animations)
     {
-        std::cout << "Updating animation #" << ++i << "\n";
+        // std::cout << "Updating animation #" << ++i << "\n";
         animation->update(time);
     }
-    std::cout << "\n";
+    // std::cout << "\n";
 }
 
 void AnimationSystem::addComponent(AnimationComponent* component)

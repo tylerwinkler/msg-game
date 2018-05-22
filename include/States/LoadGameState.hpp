@@ -1,12 +1,12 @@
-#ifndef MSG_GAME_MAINMENUSTATE_HPP
-#define MSG_GAME_MAINMENUSTATE_HPP
+#ifndef MSG_GAME_LOADGAMESTATE_HPP
+#define MSG_GAME_LOADGAMESTATE_HPP
 
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Text.hpp"
 
 #include "State.hpp"
 
-class MainMenuState : public State
+class LoadGameState : public State
 {
 public:
     bool init() final override;
@@ -22,10 +22,7 @@ public:
 private:
     sf::Sprite m_background;
     sf::Text m_menuHeader;
-    sf::Text m_newGameText;
-    sf::Text m_loadGameText;
-    sf::Text m_optionsText;
-    sf::Text m_exitText;
-}; // MainMenuState
+    sf::Text m_backText;
+}; // LoadGameState
 
-#endif // MSG_GAME_MAINMENUSTATE_HPP
+#endif // MSG_GAME_LOADGAMESTATE_HPP

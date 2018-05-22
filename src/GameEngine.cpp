@@ -3,17 +3,24 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
+#include "SFML/Graphics/RenderWindow.hpp"
+
+#include "Systems/AnimationSystem.hpp"
+#include "Systems/CollisionSystem.hpp"
+
 #include "FontManager.hpp"
 #include "State.hpp"
 #include "StateMachine.hpp"
 #include "TextureManager.hpp"
 
-GameEngine::GameEngine() : m_running(false), m_fontManager(new FontManager),
- m_window(), m_stateMachine(new StateMachine), m_textureManager(new TextureManager)
+GameEngine::GameEngine() : m_running(false), m_window(new sf::RenderWindow),
+    m_fontManager(new FontManager), m_stateMachine(new StateMachine),
+    m_textureManager(new TextureManager),m_animationSystem(new AnimationSystem),
+    m_collisionSystem(new CollisionSystem)
 {
-    m_window.create(sf::VideoMode(800, 600, 32), "My SFML Game");
+    m_window->create(sf::VideoMode(800, 600, 32), "My SFML Game");
 
-    ImGui::SFML::Init(m_window);
+    ImGui::SFML::Init(*m_window);
 }
 
 GameEngine::~GameEngine()
@@ -41,7 +48,7 @@ void GameEngine::run(State* initialState, int ups)
         State* state = m_stateMachine->getState();
 
         sf::Event event;
-        while (m_window.pollEvent(event))
+        while (m_window->pollEvent(event))
         {
             ImGui::SFML::ProcessEvent(event);
 
@@ -86,13 +93,13 @@ void GameEngine::run(State* initialState, int ups)
         {
         }
 
-        ImGui::SFML::Update(m_window, imguiClock.restart());
+        ImGui::SFML::Update(*m_window, imguiClock.restart());
         state->imguiUpdate();
 
-        m_window.clear();
+        m_window->clear();
         state->render();
-        ImGui::SFML::Render(m_window);
-        m_window.display();
+        ImGui::SFML::Render(*m_window);
+        m_window->display();
 
         if (m_stateMachine->hasPendingStateChange())
         {
@@ -100,7 +107,7 @@ void GameEngine::run(State* initialState, int ups)
         }
     }
     ImGui::SFML::Shutdown();
-    m_window.close();
+    m_window->close();
 }
 
 void GameEngine::quit()
@@ -125,5 +132,16 @@ TextureManager& GameEngine::getTextureManager()
 
 sf::RenderWindow& GameEngine::getWindow()
 {
-    return m_window;
+    return *m_window;
 }
+
+AnimationSystem& GameEngine::getAnimationSystem()
+{
+    return *m_animationSystem;
+}
+
+CollisionSystem& GameEngine::getCollisionSystem()
+{
+    return *m_collisionSystem;
+}
+

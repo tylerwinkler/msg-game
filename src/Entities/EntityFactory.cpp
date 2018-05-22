@@ -10,6 +10,42 @@
 
 #include <iostream>
 
+Entity EntityFactory::create(const std::string& entityType)
+{
+    const std::string& s = entityType;
+    if (s == "torch")
+    {
+        return createTorch();
+    }
+    else if (s == "spawn")
+    {
+        // return createSpawn();
+    }
+    else if (s == "spawn")
+    {
+        // return createSpawn();
+    }
+    else if (s == "spawn")
+    {
+        // return createSpawn();
+    }
+    else if (s == "spawn")
+    {
+        // return createSpawn();
+    }
+    else if (s == "spawn")
+    {
+        // return createSpawn();
+    }
+    else if (s == "spawn")
+    {
+        // return createSpawn();
+    }
+
+    return std::move(createMapTransition(0));
+    throw std::runtime_error("Entity not known to factory");
+}
+
 Entity EntityFactory::createMapTransition(int transitionId)
 {
     Entity entity;
@@ -18,16 +54,12 @@ Entity EntityFactory::createMapTransition(int transitionId)
 
     CollisionComponent& coll = entity.getComponent<CollisionComponent>();
 
-    coll.setCollisionFunc([]{
-                              throw std::logic_error("Not implemented");
-                          });
-
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Map Transition Entity");
     }
 
-    return entity;
+    return std::move(entity);
 }
 
 Entity EntityFactory::createCharacter(int characterId)
@@ -35,7 +67,7 @@ Entity EntityFactory::createCharacter(int characterId)
     Entity entity;
 
     entity.addComponent(ComponentFactory::createAnimationComponent());
-    entity.addComponent(ComponentFactory::createCollisionComponent());
+    entity.addComponent(ComponentFactory::createCollisionComponent(0, 0, 32, 32));
     entity.addComponent(ComponentFactory::createHealthComponent());
     entity.addComponent(ComponentFactory::createSpriteComponent("./assets/images/character.png"));
 
@@ -63,7 +95,7 @@ Entity EntityFactory::createCharacter(int characterId)
         throw std::logic_error("Failed to init Character Entity");
     }
 
-    return entity;
+    return std::move(entity);
 }
 
 Entity EntityFactory::createTorch()
@@ -88,7 +120,7 @@ Entity EntityFactory::createTorch()
         throw std::logic_error("Failed to init Torch Entity");
     }
 
-    return entity;
+    return std::move(entity);
 }
 
 Entity EntityFactory::createChest()
@@ -108,5 +140,5 @@ Entity EntityFactory::createChest()
         throw std::logic_error("Failed to init Chest Entity");
     }
 
-    return entity;
+    return std::move(entity);
 }

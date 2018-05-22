@@ -1,5 +1,9 @@
 #include "Components/CollisionComponent.hpp"
 
+#include "Entities/Entity.hpp"
+
+#include <iostream>
+
 CollisionComponent::CollisionComponent() : CollisionComponent(0, 0, 0, 0)
 {
 }
@@ -8,19 +12,34 @@ CollisionComponent::CollisionComponent(int x, int y, int width, int height)
 {
     type = ComponentType::CollisionComponent;
 
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
+    rect = sf::IntRect(x, y, width, height);
+
+    m_collisionFunc = nullptr;
 }
 
-void CollisionComponent::setCollisionFunc(std::function<void()> func)
+bool CollisionComponent::onInit(Entity* owner)
 {
-    m_collisionFunc = func;
+    owner->addObserver(this);
+    std::cout << "CollisionComponent Listening\n";
+    return true;
 }
 
-void CollisionComponent::onCollision()
+void CollisionComponent::setCollisionFunc(std::function<void(Entity&)> func)
 {
+    m_collisionFunc = std::move(func);
+}
+
+void CollisionComponent::onCollision(Entity& other)
+{
+    std::cout << "Colliding!\n";
     if (m_collisionFunc != nullptr)
-    m_collisionFunc();
+    {
+        m_collisionFunc(other);
+    }
+}
+
+void CollisionComponent::receive(int x, int y)
+{
+    rect.left = x;
+    rect.top = y;
 }

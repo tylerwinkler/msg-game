@@ -17,6 +17,8 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 
+#include "SFML/System/Clock.hpp"
+
 #include "Components/AnimationComponent.hpp"
 #include "Components/CollisionComponent.hpp"
 #include "Components/HealthComponent.hpp"
@@ -28,6 +30,8 @@
 #include "Tilemap/TileMapRenderer.hpp"
 #include "Tilemap/TileMapSerializer.hpp"
 
+#include "UI/LootWindow.hpp"
+
 #include "CharacterRenderer.hpp"
 #include "Console.hpp"
 #include "GameEngine.hpp"
@@ -37,6 +41,7 @@
 #include "TextureManager.hpp"
 #include "TilemapEditor.hpp"
 
+#include "TmxLoader.hpp"
 
 class TestGameState : public State
 {
@@ -69,7 +74,6 @@ public:
     bool torchLit = false;
     Entity torch2;
     bool lightControl = false;
-    AnimationSystem animationSystem;
     sf::Clock deltaClock;
     std::string action = "Idle";
     TileMap map;
@@ -95,6 +99,8 @@ public:
     sf::Sound sound;
     bool m_interact;
     bool m_sprint;
+    TmxMap map2;
+    LootWindow lootWin;
 }; // TestGameState
 
 #endif // MSG_GAME_TEST_TESTGAMESTATE_HPP

@@ -7,6 +7,7 @@ struct Tile
 {
     enum TileID
     {
+        VOID,
         WATER,
         GRASS,
         WATER_GRATE,
