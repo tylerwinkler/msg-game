@@ -16,6 +16,8 @@ public:
     static ComponentPtr createCollisionComponent();
     static ComponentPtr createCollisionComponent(int x, int y, int width, int height);
 
+    static ComponentPtr createDialogComponent();
+
     static ComponentPtr createHealthComponent();
 
     static ComponentPtr createInteractionComponent();

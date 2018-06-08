@@ -34,11 +34,11 @@ bool MainMenuState::init()
     m_optionsText.setPosition(sf::Vector2f(160, 220));
     m_exitText.setPosition(sf::Vector2f(180, 260));
 
-    m_menuHeader.setColor(sf::Color::Black);
-    m_newGameText.setColor(sf::Color::Black);
-    m_loadGameText.setColor(sf::Color::Black);
-    m_optionsText.setColor(sf::Color::Black);
-    m_exitText.setColor(sf::Color::Black);
+    m_menuHeader.setFillColor(sf::Color::Black);
+    m_newGameText.setFillColor(sf::Color::Black);
+    m_loadGameText.setFillColor(sf::Color::Black);
+    m_optionsText.setFillColor(sf::Color::Black);
+    m_exitText.setFillColor(sf::Color::Black);
 
     return true;
 }
@@ -76,7 +76,7 @@ void MainMenuState::update()
 
 }
 
-void MainMenuState::render()
+void MainMenuState::render(float interpolation)
 {
     Global::game.getWindow().draw(m_background);
     Global::game.getWindow().draw(m_menuHeader);

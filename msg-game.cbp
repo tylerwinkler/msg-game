@@ -58,7 +58,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-std=c++11" />
+			<Add option="-std=c++14" />
 			<Add directory="include" />
 			<Add directory="extlib/SFML/include" />
 			<Add directory="extlib/imgui" />
@@ -78,6 +78,7 @@
 		<Unit filename="include/Components/CollisionComponent.hpp" />
 		<Unit filename="include/Components/Component.hpp" />
 		<Unit filename="include/Components/ComponentFactory.hpp" />
+		<Unit filename="include/Components/DialogComponent.hpp" />
 		<Unit filename="include/Components/HealthComponent.hpp" />
 		<Unit filename="include/Components/InteractionComponent.hpp" />
 		<Unit filename="include/Components/LootComponent.hpp" />
@@ -102,6 +103,8 @@
 		<Unit filename="include/Systems/AnimationSystem.hpp" />
 		<Unit filename="include/Systems/CollisionSystem.hpp" />
 		<Unit filename="include/Systems/EntitySystem.hpp" />
+		<Unit filename="include/Systems/RenderingSystem.hpp" />
+		<Unit filename="include/Systems/System.hpp" />
 		<Unit filename="include/TextureManager.hpp" />
 		<Unit filename="include/TilemapEditor.hpp" />
 		<Unit filename="include/Tilemap/TileMap.hpp" />
@@ -111,6 +114,8 @@
 		<Unit filename="include/TmxLoader.hpp" />
 		<Unit filename="include/TmxMap.hpp" />
 		<Unit filename="include/TmxRenderer.hpp" />
+		<Unit filename="include/UI/DialogWindow.hpp" />
+		<Unit filename="include/UI/Frame.hpp" />
 		<Unit filename="include/UI/LootWindow.hpp" />
 		<Unit filename="include/Wallet.hpp" />
 		<Unit filename="src/Animation.cpp" />
@@ -144,6 +149,7 @@
 		<Unit filename="src/Systems/AnimationSystem.cpp" />
 		<Unit filename="src/Systems/CollisionSystem.cpp" />
 		<Unit filename="src/Systems/EntitySystem.cpp" />
+		<Unit filename="src/Systems/System.cpp" />
 		<Unit filename="src/TextureManager.cpp" />
 		<Unit filename="src/TilemapEditor.cpp" />
 		<Unit filename="src/Tilemap/TileMap.cpp" />
@@ -152,6 +158,8 @@
 		<Unit filename="src/Tilemap/TileRenderer.cpp" />
 		<Unit filename="src/TmxLoader.cpp" />
 		<Unit filename="src/TmxRenderer.cpp" />
+		<Unit filename="src/UI/DialogWindow.cpp" />
+		<Unit filename="src/UI/Frame.cpp" />
 		<Unit filename="src/UI/LootWindow.cpp" />
 		<Unit filename="src/Wallet.cpp" />
 		<Unit filename="test/Test.cpp">

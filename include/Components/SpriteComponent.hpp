@@ -15,7 +15,7 @@ public:
     SpriteComponent(const std::string& texture);
 
 public:
-    bool onInit(Entity* owner) final override;
+    bool onInit(int ownerID) final override;
 
     void setPosition(sf::Vector2f position);
 

@@ -29,7 +29,7 @@ namespace
 
         std::string token = str.substr(foundPosition, str.find("\"", foundPosition) - foundPosition);
 
-        std::cout << "Found " << searchVal << ". Value = " << token << "\n";
+        //std::cout << "Found " << searchVal << ". Value = " << token << "\n";
 
         std::stringstream ss(token);
 
@@ -83,9 +83,9 @@ namespace
                 ss1 >> tile;
                 map.tiles.push_back(tile);
 
-                std::cout << tile << ",";
+                //std::cout << tile << ",";
             }
-            std::cout << '\n';
+            //std::cout << '\n';
         }
     }
 

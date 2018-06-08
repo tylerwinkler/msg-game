@@ -17,7 +17,7 @@ public:
 
     void update() final override;
 
-    void render() final override;
+    void render(float interpolation) final override;
 
 private:
     sf::Sprite m_background;

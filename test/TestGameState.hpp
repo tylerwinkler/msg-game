@@ -30,6 +30,7 @@
 #include "Tilemap/TileMapRenderer.hpp"
 #include "Tilemap/TileMapSerializer.hpp"
 
+#include "UI/DialogWindow.hpp"
 #include "UI/LootWindow.hpp"
 
 #include "CharacterRenderer.hpp"
@@ -58,13 +59,14 @@ public:
 
     void update() final override;
 
-    void render() final override;
+    void render(float interpolation) final override;
 
     void cleanup() final override;
 
     void imguiUpdate() final override;
 
 public:
+    sf::View ui;
     sf::View camera;
     std::vector<IMouseEventListener*> mouseListeners;
     Console console;
@@ -72,7 +74,6 @@ public:
     enum Movement {UP, DOWN, LEFT, RIGHT};
     Player player;
     bool torchLit = false;
-    Entity torch2;
     bool lightControl = false;
     sf::Clock deltaClock;
     std::string action = "Idle";
@@ -80,9 +81,9 @@ public:
     const int CanSwim = false;
     sf::RectangleShape rect;
     sf::Sprite torch;
-    Entity trans;
-    Entity character;
-    Entity chest;
+    int transID;
+    int torch2ID;
+    int chestID;
     sf::Clock frameTime;
     sf::Clock torchClock;
     float seconds = -3.f;
@@ -101,6 +102,11 @@ public:
     bool m_sprint;
     TmxMap map2;
     LootWindow lootWin;
+    DialogWindow diagWin;
+
+    int incrementer;
+
+    int trees[200];
 }; // TestGameState
 
 #endif // MSG_GAME_TEST_TESTGAMESTATE_HPP

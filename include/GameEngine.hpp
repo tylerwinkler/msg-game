@@ -5,6 +5,7 @@ namespace sf { class RenderWindow; }
 
 class AnimationSystem;
 class CollisionSystem;
+class EntitySystem;
 class FontManager;
 class State;
 class StateMachine;
@@ -33,8 +34,14 @@ public:
 
     CollisionSystem& getCollisionSystem();
 
+    EntitySystem& getEntitySystem();
+
+    int getUPS();
+
 private:
     bool m_running;
+
+    int m_ups;
 
     sf::RenderWindow* m_window;
 
@@ -47,6 +54,8 @@ private:
     FontManager* m_fontManager;
 
     TextureManager* m_textureManager;
+
+    EntitySystem* m_entitySystem;
 }; // GameEngine
 
 #endif // MSG_GAME_GAMEENGINE_HPP

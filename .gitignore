@@ -36,4 +36,4 @@
 *.layout
 
 # imgui
-imgui.ini
+*.ini

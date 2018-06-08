@@ -21,7 +21,8 @@ int EntitySystem::getFreeEntity()
     {
         if (!m_active[i])
         {
-            return m_entities[i];
+            m_active[i] = true;
+            return i;
         }
     }
 

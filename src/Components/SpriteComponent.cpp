@@ -1,10 +1,10 @@
 #include "Components/SpriteComponent.hpp"
 
-#include <iostream>
-
 #include "SFML/Graphics/RenderTarget.hpp"
 
 #include "Entities/Entity.hpp"
+
+#include "Systems/EntitySystem.hpp"
 
 #include "Global.hpp"
 #include "GameEngine.hpp"
@@ -20,10 +20,9 @@ SpriteComponent::SpriteComponent(const std::string& texture) : SpriteComponent()
     m_sprite.setTexture(Global::game.getTextureManager().get(texture));
 }
 
-bool SpriteComponent::onInit(Entity* owner)
+bool SpriteComponent::onInit(int ownerID)
 {
-    owner->addObserver(this);
-    std::cout << "SpriteComponent Listening\n";
+    Global::game.getEntitySystem().getEntity(ownerID).addObserver(this);
     return true;
 }
 
@@ -49,6 +48,5 @@ void SpriteComponent::render(sf::RenderTarget& target)
 
 void SpriteComponent::receive(int x, int y)
 {
-    std::cout << "Received\n";
     m_sprite.setPosition(x, y);
 }

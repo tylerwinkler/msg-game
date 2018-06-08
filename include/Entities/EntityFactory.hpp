@@ -3,20 +3,20 @@
 
 #include <string>
 
-#include "Entities/Entity.hpp"
-
 class EntityFactory
 {
 public:
-    static Entity create(const std::string& entityType);
+    static int create(const std::string& entityType);
 
-    static Entity createMapTransition(int transitionId);
+    static int createMapTransition(int transitionId);
 
-    static Entity createCharacter(int characterId);
+    static int createCharacter(int characterId);
 
-    static Entity createTorch();
+    static int createTorch();
 
-    static Entity createChest();
+    static int createChest();
+
+    static int createTree();
 }; // EntityFactory
 
 #endif // MSG_GAME_ENTITIES_ENTITYFACTORY_HPP

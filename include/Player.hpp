@@ -13,14 +13,16 @@ public:
 
     Wallet& getWallet();
 
-    Entity& getCharacter();
+    void setCharacterID(int id);
+
+    int getCharacterID();
 
 private:
     Inventory m_inventory;
 
     Wallet m_wallet;
 
-    Entity m_character;
+    int m_characterID;
 }; // Player
 
 #endif // MSG_GAME_PLAYER_HPP

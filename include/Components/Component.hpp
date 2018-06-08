@@ -1,14 +1,13 @@
 #ifndef MSG_GAME_COMPONENT_HPP
 #define MSG_GAME_COMPONENT_HPP
 
-class Entity;
-
 namespace ComponentType
 {
     enum
     {
         AnimationComponent,
         CollisionComponent,
+        DialogComponent,
         HealthComponent,
         SpriteComponent,
         LootComponent,
@@ -19,23 +18,23 @@ namespace ComponentType
 class Component
 {
 public:
-    Component(){m_owner = nullptr;}
+    Component(){m_ownerID = -1;}
 
 public:
     int type;
 
-    bool init(Entity* owner);
+    bool init(int ownerID);
 
     virtual void receive(int x, int y){}
 
 private:
-    virtual bool onInit(Entity* owner){return true;}
+    virtual bool onInit(int ID){return true;}
 
 public:
     int getOwnerID();
 
 private:
-    int m_owner;
+    int m_ownerID;
 }; // Component
 
 #endif // MSG_GAME_COMPONENT_HPP

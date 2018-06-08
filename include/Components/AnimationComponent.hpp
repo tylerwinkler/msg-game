@@ -16,7 +16,7 @@ public:
     AnimationComponent();
 
 public:
-    bool onInit(Entity* owner) final override;
+    bool onInit(int ownerID) final override;
 
     void addAnimation(const std::string& name, Animation animation);
 
@@ -30,6 +30,8 @@ private:
 private:
     std::map<std::string, Animation> m_animations;
     Animation* m_currentAnimation;
+
+    std::string m_animation;
 
     float m_accumulatedTime;
     int m_currentIndex;

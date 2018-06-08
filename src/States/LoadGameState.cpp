@@ -50,7 +50,7 @@ void LoadGameState::update()
 
 }
 
-void LoadGameState::render()
+void LoadGameState::render(float interpolation)
 {
     Global::game.getWindow().draw(m_background);
     Global::game.getWindow().draw(m_menuHeader);

@@ -15,7 +15,7 @@ public:
 
     Entity& getEntity(int id);
 
-    Entity& getFreeEntity();
+    int getFreeEntity();
 
 private:
     Entity m_entities[MaxEntities];

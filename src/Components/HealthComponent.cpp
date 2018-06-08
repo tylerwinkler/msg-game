@@ -7,12 +7,7 @@ HealthComponent::HealthComponent()
     hp = 1.f;
 }
 
-bool HealthComponent::init(Entity& owner)
-{
-    return true;
-}
-
-void HealthComponent::update(Entity& owner)
+void HealthComponent::update(int ownerID)
 {
 
 }

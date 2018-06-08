@@ -10,7 +10,12 @@ Wallet& Player::getWallet()
     return m_wallet;
 }
 
-Entity& Player::getCharacter()
+void Player::setCharacterID(int id)
 {
-    return m_character;
+    m_characterID = id;
+}
+
+int Player::getCharacterID()
+{
+    return m_characterID;
 }

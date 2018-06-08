@@ -50,7 +50,7 @@ void OptionsState::update()
 
 }
 
-void OptionsState::render()
+void OptionsState::render(float interpolation)
 {
     Global::game.getWindow().draw(m_background);
     Global::game.getWindow().draw(m_menuHeader);

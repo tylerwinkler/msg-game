@@ -4,6 +4,9 @@
 
 void Entity::setPosition(int x, int y)
 {
+    oldPosition.x = position.x;
+    oldPosition.y = position.y;
+
     position.x = x;
     position.y = y;
 
@@ -16,11 +19,6 @@ void Entity::setPosition(int x, int y)
 void Entity::assignID(int id)
 {
     this->id = id;
-
-    for (auto& comp : m_components)
-    {
-        comp.second()->setOwnerID(id);
-    }
 }
 
 void Entity::addComponent(std::unique_ptr<Component> component)
@@ -42,7 +40,7 @@ bool Entity::init()
 {
     for (auto& comp : m_components)
     {
-        if (!comp.second->init(this))
+        if (!comp.second->init(id))
         {
             return false;
         }

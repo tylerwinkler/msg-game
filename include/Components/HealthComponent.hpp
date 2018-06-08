@@ -11,9 +11,7 @@ public:
     float hp;
 
 public:
-    bool init(Entity& owner);
-
-    void update(Entity& owner);
+    void update(int ownerID);
 };
 
 #endif // MSG_GAME_COMPONENTS_HEALTHCOMPONENT_HPP

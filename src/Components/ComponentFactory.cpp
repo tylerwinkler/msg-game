@@ -2,6 +2,7 @@
 
 #include "Components/AnimationComponent.hpp"
 #include "Components/CollisionComponent.hpp"
+#include "Components/DialogComponent.hpp"
 #include "Components/HealthComponent.hpp"
 #include "Components/InteractionComponent.hpp"
 #include "Components/LootComponent.hpp"
@@ -24,6 +25,13 @@ ComponentFactory::ComponentPtr ComponentFactory::createCollisionComponent()
 ComponentFactory::ComponentPtr ComponentFactory::createCollisionComponent(int x, int y, int width, int height)
 {
     std::unique_ptr<Component> component(new CollisionComponent(x, y, width, height));
+
+    return std::move(component);
+}
+
+ComponentFactory::ComponentPtr ComponentFactory::createDialogComponent()
+{
+    std::unique_ptr<Component> component(new DialogComponent());
 
     return std::move(component);
 }

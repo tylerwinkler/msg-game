@@ -1,5 +1,7 @@
 #include "GameEngine.hpp"
 
+#include <iostream>
+
 #include "imgui.h"
 #include "imgui-SFML.h"
 
@@ -7,6 +9,7 @@
 
 #include "Systems/AnimationSystem.hpp"
 #include "Systems/CollisionSystem.hpp"
+#include "Systems/EntitySystem.hpp"
 
 #include "FontManager.hpp"
 #include "State.hpp"
@@ -16,7 +19,7 @@
 GameEngine::GameEngine() : m_running(false), m_window(new sf::RenderWindow),
     m_fontManager(new FontManager), m_stateMachine(new StateMachine),
     m_textureManager(new TextureManager),m_animationSystem(new AnimationSystem),
-    m_collisionSystem(new CollisionSystem)
+    m_collisionSystem(new CollisionSystem), m_entitySystem(new EntitySystem)
 {
     m_window->create(sf::VideoMode(800, 600, 32), "My SFML Game");
 
@@ -32,6 +35,8 @@ void GameEngine::run(State* initialState, int ups)
 {
     m_stateMachine->pushState(initialState);
 
+    m_ups = ups;
+
     m_running = true;
 
     sf::Clock imguiClock;
@@ -42,6 +47,8 @@ void GameEngine::run(State* initialState, int ups)
     int stepInterval = OneSecondMS / ups;
 
     int nextUpdate = frameClock.getElapsedTime().asMilliseconds() + stepInterval;
+
+    sf::Vector2f mouseDestination;
 
     while (m_running)
     {
@@ -91,13 +98,17 @@ void GameEngine::run(State* initialState, int ups)
         }
         if (accumulator == 0)
         {
+            std::cout << "Game running behind!\n";
         }
 
         ImGui::SFML::Update(*m_window, imguiClock.restart());
         state->imguiUpdate();
 
         m_window->clear();
-        state->render();
+
+        float interpolation = 1.f - float(frameClock.getElapsedTime().asMilliseconds()) / nextUpdate;
+
+        state->render(interpolation);
         ImGui::SFML::Render(*m_window);
         m_window->display();
 
@@ -106,6 +117,12 @@ void GameEngine::run(State* initialState, int ups)
             m_stateMachine->processPendingStateChange();
         }
     }
+
+    if (m_stateMachine->getState() != nullptr)
+    {
+        m_stateMachine->getState()->cleanup();
+    }
+
     ImGui::SFML::Shutdown();
     m_window->close();
 }
@@ -145,3 +162,12 @@ CollisionSystem& GameEngine::getCollisionSystem()
     return *m_collisionSystem;
 }
 
+EntitySystem& GameEngine::getEntitySystem()
+{
+    return *m_entitySystem;
+}
+
+int GameEngine::getUPS()
+{
+    return m_ups;
+}

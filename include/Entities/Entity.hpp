@@ -14,6 +14,7 @@ class Entity
 public:
     void setPosition(int x, int y);
 
+    sf::Vector2f oldPosition;
     sf::Vector2f position;
 
     int id;

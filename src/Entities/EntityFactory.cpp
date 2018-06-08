@@ -8,18 +8,21 @@
 #include "Components/InteractionComponent.hpp"
 #include "Components/LootComponent.hpp"
 
-#include <iostream>
+#include "Systems/EntitySystem.hpp"
 
-Entity EntityFactory::create(const std::string& entityType)
+#include "GameEngine.hpp"
+#include "Global.hpp"
+
+int EntityFactory::create(const std::string& entityType)
 {
     const std::string& s = entityType;
     if (s == "torch")
     {
         return createTorch();
     }
-    else if (s == "spawn")
+    else if (s == "tree")
     {
-        // return createSpawn();
+        return createTree();
     }
     else if (s == "spawn")
     {
@@ -42,37 +45,36 @@ Entity EntityFactory::create(const std::string& entityType)
         // return createSpawn();
     }
 
-    return std::move(createMapTransition(0));
+    return createMapTransition(0);
     throw std::runtime_error("Entity not known to factory");
 }
 
-Entity EntityFactory::createMapTransition(int transitionId)
+int EntityFactory::createMapTransition(int transitionId)
 {
-    Entity entity;
+    int id = Global::game.getEntitySystem().getFreeEntity();
+    Entity& entity = Global::game.getEntitySystem().getEntity(id);
 
     entity.addComponent(ComponentFactory::createCollisionComponent(-24, -24, 48, 48));
 
-    CollisionComponent& coll = entity.getComponent<CollisionComponent>();
+    entity.assignID(id);
 
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Map Transition Entity");
     }
 
-    return std::move(entity);
+    return id;
 }
 
-Entity EntityFactory::createCharacter(int characterId)
+int EntityFactory::createCharacter(int characterId)
 {
-    Entity entity;
+    int id = Global::game.getEntitySystem().getFreeEntity();
+    Entity& entity = Global::game.getEntitySystem().getEntity(id);
 
     entity.addComponent(ComponentFactory::createAnimationComponent());
     entity.addComponent(ComponentFactory::createCollisionComponent(0, 0, 32, 32));
     entity.addComponent(ComponentFactory::createHealthComponent());
     entity.addComponent(ComponentFactory::createSpriteComponent("./assets/images/character.png"));
-
-    sf::Sprite& sprite = entity.getComponent<SpriteComponent>().getSprite();
-    sprite.setOrigin(sprite.getLocalBounds().width / 2 / 3, sprite.getLocalBounds().height / 2 / 3);
 
     Animation walkLeft;
     walkLeft.loadFromFile("./assets/animations/characters/walkLeft.anim");
@@ -90,42 +92,60 @@ Entity EntityFactory::createCharacter(int characterId)
     walkDown.loadFromFile("./assets/animations/characters/walkDown.anim");
     entity.getComponent<AnimationComponent>().addAnimation("walkDown", walkDown);
 
+    entity.assignID(id);
+
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Character Entity");
     }
 
-    return std::move(entity);
+    return id;
 }
 
-Entity EntityFactory::createTorch()
+int EntityFactory::createTorch()
 {
-    Entity entity;
+    int id = Global::game.getEntitySystem().getFreeEntity();
+    Entity& entity = Global::game.getEntitySystem().getEntity(id);
 
     entity.addComponent(ComponentFactory::createAnimationComponent());
     entity.addComponent(ComponentFactory::createSpriteComponent("./assets/images/torch.png"));
+    entity.addComponent(ComponentFactory::createCollisionComponent(0, 0, 32, 32));
+
+    CollisionComponent& coll = entity.getComponent<CollisionComponent>();
+    coll.setCollisionFunc([&](CollisionComponent& other){
+                            //if (entity.getComponent<LightComponent>().isActive())
+                            {
+                                entity.getComponent<AnimationComponent>().playAnimation("lightOff");
+                            }
+//                            else
+//                            {
+//                                entity.getComponent<AnimationComponent>().playAnimation("lightOn");
+//                            }
+                          });
 
     Animation lightOn;
     lightOn.loadFromFile("./assets/animations/torch/on.anim");
 
-    entity.getComponent<AnimationComponent>().addAnimation("lightOn", lightOn);
-
     Animation lightOff;
     lightOff.loadFromFile("./assets/animations/torch/off.anim");
 
+    entity.getComponent<AnimationComponent>().addAnimation("lightOn", lightOn);
     entity.getComponent<AnimationComponent>().addAnimation("lightOff", lightOff);
+
+    entity.assignID(id);
 
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Torch Entity");
     }
 
-    return std::move(entity);
+    return id;
 }
 
-Entity EntityFactory::createChest()
+int EntityFactory::createChest()
 {
-    Entity entity;
+    int id = Global::game.getEntitySystem().getFreeEntity();
+    Entity& entity = Global::game.getEntitySystem().getEntity(id);
 
     entity.addComponent(ComponentFactory::createSpriteComponent("./assets/images/chest.png"));
     entity.addComponent(ComponentFactory::createLootComponent());
@@ -135,10 +155,32 @@ Entity EntityFactory::createChest()
     entity.getComponent<LootComponent>().getItems().push_back(1);
     entity.getComponent<LootComponent>().getItems().push_back(1);
 
+    entity.assignID(id);
+
     if (!entity.init())
     {
         throw std::logic_error("Failed to init Chest Entity");
     }
 
-    return std::move(entity);
+    return id;
+}
+
+int EntityFactory::createTree()
+{
+    int id = Global::game.getEntitySystem().getFreeEntity();
+    Entity& entity = Global::game.getEntitySystem().getEntity(id);
+
+    entity.addComponent(ComponentFactory::createSpriteComponent("./assets/images/tree.png"));
+    entity.addComponent(ComponentFactory::createLootComponent());
+    entity.addComponent(ComponentFactory::createInteractionComponent());
+    entity.addComponent(ComponentFactory::createCollisionComponent(0, 16, 32, 32));
+
+    entity.assignID(id);
+
+    if (!entity.init())
+    {
+        throw std::logic_error("Failed to init Tree Entity");
+    }
+
+    return id;
 }

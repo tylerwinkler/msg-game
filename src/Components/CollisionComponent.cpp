@@ -2,7 +2,10 @@
 
 #include "Entities/Entity.hpp"
 
-#include <iostream>
+#include "Systems/EntitySystem.hpp"
+
+#include "GameEngine.hpp"
+#include "Global.hpp"
 
 CollisionComponent::CollisionComponent() : CollisionComponent(0, 0, 0, 0)
 {
@@ -14,24 +17,28 @@ CollisionComponent::CollisionComponent(int x, int y, int width, int height)
 
     rect = sf::IntRect(x, y, width, height);
 
+    offsetX = x;
+    offsetY = y;
+
+    trigger = false;
+
     m_collisionFunc = nullptr;
 }
 
-bool CollisionComponent::onInit(Entity* owner)
+bool CollisionComponent::onInit(int ownerID)
 {
-    owner->addObserver(this);
-    std::cout << "CollisionComponent Listening\n";
+    Global::game.getEntitySystem().getEntity(ownerID).addObserver(this);
+
     return true;
 }
 
-void CollisionComponent::setCollisionFunc(std::function<void(Entity&)> func)
+void CollisionComponent::setCollisionFunc(std::function<void(CollisionComponent&)> func)
 {
     m_collisionFunc = std::move(func);
 }
 
-void CollisionComponent::onCollision(Entity& other)
+void CollisionComponent::onCollision(CollisionComponent& other)
 {
-    std::cout << "Colliding!\n";
     if (m_collisionFunc != nullptr)
     {
         m_collisionFunc(other);

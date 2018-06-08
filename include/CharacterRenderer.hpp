@@ -8,7 +8,7 @@
 class CharacterRenderer
 {
 public:
-    void render(sf::RenderTarget& target, Entity& character);
+    void render(sf::RenderTarget& target, Entity& character, float interpolation);
 
 private:
 };
