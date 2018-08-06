@@ -5,6 +5,7 @@
 #include "FontManager.hpp"
 #include "GameEngine.hpp"
 #include "Global.hpp"
+#include "ItemList.hpp"
 
 LootWindow::LootWindow()
 {
@@ -47,7 +48,7 @@ void LootWindow::open(LootComponent& loot)
     {
         sf::Text text;
         text.setFont(Global::game.getFontManager().get("./assets/fonts/font.ttf"));
-        text.setString("Dagger");
+        text.setString(ItemList::getItemById(item).m_name);
         text.setCharacterSize(16);
         text.setPosition(m_frame.getPosition().x + 10, m_frame.getPosition().y + 50 + 20 * count);
 

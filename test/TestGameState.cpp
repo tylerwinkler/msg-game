@@ -5,6 +5,7 @@
 
 #include "SFML/Graphics/RenderWindow.hpp"
 
+#include "Components/BankComponent.hpp"
 #include "Components/ComponentFactory.hpp"
 #include "Components/DialogComponent.hpp"
 #include "Components/LootComponent.hpp"
@@ -12,8 +13,8 @@
 #include "Systems/CollisionSystem.hpp"
 #include "Systems/EntitySystem.hpp"
 
+#include "ItemList.hpp"
 #include "TmxRenderer.hpp"
-
 
 namespace {
     bool controls[] = {false, false, false, false};
@@ -136,6 +137,14 @@ bool TestGameState::init()
     console.setFunction("loadmap edana", [&]{map = serializer.deserialize("./assets/maps/edana.txt");});
     console.setFunction("ghost", [&]{playerCharacter.getComponent<CollisionComponent>().trigger = true;});
 
+    console.setFunction("printitems", [&]
+                        {
+                            for (auto& item : ItemList::getItems())
+                            {
+                                std::cout << item.m_id << " : " << item.m_name << "\n";
+                            }
+                        });
+
     mouseListeners.push_back(&editor);
 
     torch.setTexture(Global::game.getTextureManager().get("./assets/images/torch-unlit.png"));
@@ -249,19 +258,12 @@ void TestGameState::onKey(int keyCode, bool control, bool alt, bool shift, bool 
                 console.toggle();
             }
         }
-        if (lootWin.isOpen())
+
+        if (keyCode == sf::Keyboard::Escape)
         {
-            if (keyCode == sf::Keyboard::Escape)
-            {
-                lootWin.close();
-            }
-        }
-        if (diagWin.isOpen())
-        {
-            if (keyCode == sf::Keyboard::Escape)
-            {
-                diagWin.close();
-            }
+            lootWin.close();
+            diagWin.close();
+            bankWin.close();
         }
     }
 
@@ -290,6 +292,18 @@ void TestGameState::onKey(int keyCode, bool control, bool alt, bool shift, bool 
         {
             auto c = ComponentFactory::createDialogComponent();
             diagWin.open((DialogComponent&)*c.get());
+        }
+        break;
+    case sf::Keyboard::B:
+        {
+            BankComponent bank;
+            bank.items.push_back("Sword");
+            bank.items.push_back("Shield");
+            bank.items.push_back("Bow");
+            bank.items.push_back("12 Arrows");
+            bank.items.push_back("Saradomin Godsword");
+
+            bankWin.open(bank);
         }
         break;
     case sf::Keyboard::T:
@@ -546,6 +560,7 @@ void TestGameState::render(float interpolation)
     window.setView(ui);
     lootWin.render(window);
     diagWin.render(window);
+    bankWin.render(window);
 }
 
 void TestGameState::cleanup()

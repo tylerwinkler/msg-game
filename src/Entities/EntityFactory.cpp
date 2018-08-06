@@ -12,6 +12,7 @@
 
 #include "GameEngine.hpp"
 #include "Global.hpp"
+#include "ItemList.hpp"
 
 int EntityFactory::create(const std::string& entityType)
 {
@@ -152,8 +153,7 @@ int EntityFactory::createChest()
     entity.addComponent(ComponentFactory::createInteractionComponent());
     entity.addComponent(ComponentFactory::createCollisionComponent());
 
-    entity.getComponent<LootComponent>().getItems().push_back(1);
-    entity.getComponent<LootComponent>().getItems().push_back(1);
+    entity.getComponent<LootComponent>().getItems().push_back(ItemList::getItemByName("Developer's Knife").m_id);
 
     entity.assignID(id);
 

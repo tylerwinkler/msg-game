@@ -2,6 +2,7 @@
 
 #include "GameEngine.hpp"
 #include "Global.hpp"
+#include "ItemList.hpp"
 #include "StateMachine.hpp"
 #include "TestGameState.hpp"
 
@@ -27,6 +28,7 @@ void Test::pass(const std::string& message)
 
 int main(int argc, char* argv[])
 {
+    ItemList();
     GameEngine& game = Global::game;
 
     game.run(new TestGameState);

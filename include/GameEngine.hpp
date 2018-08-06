@@ -43,6 +43,8 @@ private:
 
     int m_ups;
 
+    int m_nextUpdate;
+
     sf::RenderWindow* m_window;
 
     StateMachine* m_stateMachine;

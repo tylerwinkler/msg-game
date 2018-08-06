@@ -13,6 +13,8 @@ public:
 
     void close();
 
+    void toggle();
+
     bool isOpen();
 
     void render(sf::RenderTarget& target);

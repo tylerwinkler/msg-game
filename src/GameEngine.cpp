@@ -46,7 +46,7 @@ void GameEngine::run(State* initialState, int ups)
 
     int stepInterval = OneSecondMS / ups;
 
-    int nextUpdate = frameClock.getElapsedTime().asMilliseconds() + stepInterval;
+    m_nextUpdate = frameClock.getElapsedTime().asMilliseconds() + stepInterval;
 
     sf::Vector2f mouseDestination;
 
@@ -88,11 +88,11 @@ void GameEngine::run(State* initialState, int ups)
         }
 
         int accumulator = 5;
-        while (nextUpdate <= frameClock.getElapsedTime().asMilliseconds() && accumulator != 0)
+        while (m_nextUpdate <= frameClock.getElapsedTime().asMilliseconds() && accumulator != 0)
         {
             state->update();
 
-            nextUpdate += stepInterval;
+            m_nextUpdate += stepInterval;
 
             --accumulator;
         }
@@ -106,7 +106,7 @@ void GameEngine::run(State* initialState, int ups)
 
         m_window->clear();
 
-        float interpolation = 1.f - float(frameClock.getElapsedTime().asMilliseconds()) / nextUpdate;
+        float interpolation = 1.f - float(frameClock.getElapsedTime().asMilliseconds()) / m_nextUpdate;
 
         state->render(interpolation);
         ImGui::SFML::Render(*m_window);

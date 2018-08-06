@@ -14,6 +14,11 @@ void Frame::close()
     m_open = false;
 }
 
+void Frame::toggle()
+{
+    m_open = !m_open;
+}
+
 bool Frame::isOpen()
 {
     return m_open;

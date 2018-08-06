@@ -92,6 +92,8 @@
 		<Unit filename="include/IMouseEventListener.hpp" />
 		<Unit filename="include/IRenderer.hpp" />
 		<Unit filename="include/Inventory.hpp" />
+		<Unit filename="include/Item.hpp" />
+		<Unit filename="include/ItemList.hpp" />
 		<Unit filename="include/Player.hpp" />
 		<Unit filename="include/SFMLRenderer.hpp" />
 		<Unit filename="include/State.hpp" />
@@ -114,6 +116,7 @@
 		<Unit filename="include/TmxLoader.hpp" />
 		<Unit filename="include/TmxMap.hpp" />
 		<Unit filename="include/TmxRenderer.hpp" />
+		<Unit filename="include/UI/BankWindow.hpp" />
 		<Unit filename="include/UI/DialogWindow.hpp" />
 		<Unit filename="include/UI/Frame.hpp" />
 		<Unit filename="include/UI/LootWindow.hpp" />
@@ -136,6 +139,8 @@
 		<Unit filename="src/GameEngine.cpp" />
 		<Unit filename="src/Global.cpp" />
 		<Unit filename="src/Inventory.cpp" />
+		<Unit filename="src/Item.cpp" />
+		<Unit filename="src/ItemList.cpp" />
 		<Unit filename="src/Main.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
@@ -158,6 +163,7 @@
 		<Unit filename="src/Tilemap/TileRenderer.cpp" />
 		<Unit filename="src/TmxLoader.cpp" />
 		<Unit filename="src/TmxRenderer.cpp" />
+		<Unit filename="src/UI/BankWindow.cpp" />
 		<Unit filename="src/UI/DialogWindow.cpp" />
 		<Unit filename="src/UI/Frame.cpp" />
 		<Unit filename="src/UI/LootWindow.cpp" />

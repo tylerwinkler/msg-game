@@ -1,8 +1,9 @@
 #ifndef MSG_GAME_INVENTORY_HPP
 #define MSG_GAME_INVENTORY_HPP
 
-#include <string>
 #include <vector>
+
+#include "Item.hpp"
 
 class Inventory
 {

@@ -3,7 +3,6 @@
 
 #include "State.hpp"
 
-
 #include <cmath>
 #include <sstream>
 
@@ -30,6 +29,7 @@
 #include "Tilemap/TileMapRenderer.hpp"
 #include "Tilemap/TileMapSerializer.hpp"
 
+#include "UI/BankWindow.hpp"
 #include "UI/DialogWindow.hpp"
 #include "UI/LootWindow.hpp"
 
@@ -103,6 +103,8 @@ public:
     TmxMap map2;
     LootWindow lootWin;
     DialogWindow diagWin;
+
+    BankWindow bankWin;
 
     int incrementer;
 
